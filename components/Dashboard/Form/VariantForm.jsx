@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-import CheckBoxForm from "./CheckBoxForm";
+import SizeForm from "./SizeForm";
 import ImageForm from "./ImageForm";
 import { VariantButtonForm } from "./Buttons";
 import { errorMessage, successFireMessage } from "@/utils/toastify";
@@ -10,11 +10,11 @@ const VariantForm = ({ handleVariants }) => {
     name: "",
     price: "",
     stock: "",
-    image: [],
-    size: [],
+    images: [],
+    sizes: [],
   });
   const [countVariants, setCountVariants] = useState(0);
-  const [images, setImages] = useState([]);
+  const [imagesList, setImagesList] = useState([]);
   const [sizeSelected, setSizeSelected] = useState([]);
 
   const styleInput = "border border-gray-300 rounded p-1 mr-5 mt-5";
@@ -31,14 +31,14 @@ const VariantForm = ({ handleVariants }) => {
   const handleSize = (sizesArray) => {
     setVariant((prevVariant) => ({
       ...prevVariant,
-      size: sizesArray,
+      sizes: sizesArray,
     }));
   };
 
   const saveImages = (images) => {
     setVariant((prevVariant) => ({
       ...prevVariant,
-      image: images,
+      images,
     }));
   };
 
@@ -47,8 +47,8 @@ const VariantForm = ({ handleVariants }) => {
       variant.name === "" ||
       variant.price === "" ||
       variant.stock === "" ||
-      variant.image.length === 0 ||
-      variant.size.length === 0
+      variant.images.length === 0 ||
+      variant.sizes.length === 0
     ) {
       errorMessage("Por favor llene todos los campos");
       return;
@@ -60,10 +60,10 @@ const VariantForm = ({ handleVariants }) => {
       name: variant.name,
       price: variant.price,
       stock: variant.stock,
-      image: [],
-      size: [],
+      images: [],
+      sizes: [],
     });
-    setImages([]);
+    setImagesList([]);
     setSizeSelected([]);
   };
 
@@ -98,7 +98,7 @@ const VariantForm = ({ handleVariants }) => {
         />
       </div>
       <hr />
-      <CheckBoxForm
+      <SizeForm
         handleSize={handleSize}
         options={options}
         sizeSelected={sizeSelected}
@@ -106,8 +106,8 @@ const VariantForm = ({ handleVariants }) => {
       />
       <ImageForm
         saveImages={saveImages}
-        images={images}
-        setImages={setImages}
+        imagesList={imagesList}
+        setImagesList={setImagesList}
       />
       <VariantButtonForm addVariants={addVariants} />
     </div>

@@ -3,13 +3,13 @@ import { useRef } from "react";
 import { ImageButtonForm } from "./Buttons";
 import { errorMessage, successFireMessage } from "@/utils/toastify";
 
-const ImageForm = ({ saveImages, images, setImages }) => {
+const ImageForm = ({ saveImages, imagesList, setImagesList }) => {
   const imageInputRef = useRef(null);
 
   const handleSave = (newImage) => {
     successFireMessage("Imagen agregada correctamente");
-    setImages((prevImages) => [...prevImages, newImage]);
-    saveImages([...images, newImage]);
+    setImagesList((prevImages) => [...prevImages, newImage]);
+    saveImages([...imagesList, newImage]);
     imageInputRef.current.value = "";
   };
 
@@ -26,7 +26,7 @@ const ImageForm = ({ saveImages, images, setImages }) => {
     <>
       <hr />
       <div className="py-5">
-        <h2>Imagenes de la variante: {images.length}</h2>
+        <h2>Imagenes de la variante: {imagesList.length}</h2>
         <div className="flex flex-wrap">
           <input
             type="text"

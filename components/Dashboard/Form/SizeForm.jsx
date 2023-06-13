@@ -1,6 +1,4 @@
-import { useState } from "react";
-
-const CheckBoxForm = ({
+const SizeForm = ({
   handleSize,
   options,
   sizeSelected,
@@ -39,4 +37,4 @@ const CheckBoxForm = ({
   );
 };
 
-export default CheckBoxForm;
+export default SizeForm;
