@@ -7,7 +7,7 @@ const ProductCard = ({ name, description, variants }) => {
       <div className="w-full h-auto">
         <Image
           className="rounded"
-          src={variants[0].image[0]}
+          src={variants[0].images[0]}
           loading="lazy"
           width={500}
           height={500}
