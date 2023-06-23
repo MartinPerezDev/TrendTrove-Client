@@ -2,7 +2,7 @@ import HeadMenu from "./HeadMenu";
 
 import Link from "next/link";
 
-const Menu = () => {
+const Menu = ({toggleMenu}) => {
   const menuOptions = [
     {
       name: "Dashboard",
@@ -20,7 +20,7 @@ const Menu = () => {
 
   return (
     <div className="h-auto w-64 absolute my-14 bg-gray-800 p-2 flex flex-col z-10">
-      <HeadMenu />
+      <HeadMenu toggleMenu={toggleMenu} />
       {menuOptions.map((menuOption, index) => (
         <Link
           key={menuOption.name + index}

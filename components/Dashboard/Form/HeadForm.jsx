@@ -1,5 +1,5 @@
 import { NextButtonForm } from "./Buttons";
-import { errorMessage } from "@/utils/toastify";
+import { errorMessage } from "@/utils/notificationToastify";
 
 const HeadForm = ({ dataForm, handleChange, setViewVariants }) => {
   const styleInput = "border border-gray-300 rounded p-1 mt-5";

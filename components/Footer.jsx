@@ -25,28 +25,30 @@ const Footer = () => {
   ];
 
   return (
-    <div className="h-auto w-full mt-10 bg-gray-900 text-gray-300 py-5 px-2">
-      <div>
-        <div className="flex items-center text-xl">
-          <IoLocationSharp />
-          <p>Argentina</p>
-        </div>
-        <div className="py-3 flex">
-          {socialLinks.map((socialLink, index) => (
-            <Link
-              href={socialLink.link}
-              target="_blank"
-              key={socialLink.link + index}
-              className="h-10 w-10 mr-5 rounded-full flex items-center justify-center bg-gray-700"
-            >
-              {socialLink.icon}
-            </Link>
-          ))}
-        </div>
-        <p className="py-2">© 2023 TrendTrove, Inc. All Rights Reserved</p>
-        <div className="text-gray-400">
-          <p className="py-2">Terminos de uso</p>
-          <p className="py-2">Politicas de privacidad</p>
+    <div className="bg-gray-900">
+      <div className="h-auto max-w-screen-xl mx-auto mt-10 bg-gray-900 text-gray-300 py-5 px-2">
+        <div>
+          <div className="flex items-center text-xl">
+            <IoLocationSharp />
+            <p>Argentina</p>
+          </div>
+          <div className="py-3 flex">
+            {socialLinks.map((socialLink, index) => (
+              <Link
+                href={socialLink.link}
+                target="_blank"
+                key={socialLink.link + index}
+                className="h-10 w-10 mr-5 rounded-full flex items-center justify-center bg-gray-700"
+              >
+                {socialLink.icon}
+              </Link>
+            ))}
+          </div>
+          <p className="py-2">© 2023 TrendTrove, Inc. All Rights Reserved</p>
+          <div className="text-gray-400">
+            <p className="py-2">Terminos de uso</p>
+            <p className="py-2">Politicas de privacidad</p>
+          </div>
         </div>
       </div>
     </div>

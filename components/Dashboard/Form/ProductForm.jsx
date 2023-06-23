@@ -6,7 +6,7 @@ import { ProductsContext } from "@/context/ProductsContext";
 import VariantForm from "./VariantForm";
 import HeadForm from "./HeadForm";
 import { ButtonForm } from "./Buttons";
-import { errorMessage, successMessage } from "@/utils/toastify";
+import { errorMessage, successMessage } from "@/utils/notificationToastify";
 
 const ProductForm = () => {
   const { addProduct } = useContext(ProductsContext);

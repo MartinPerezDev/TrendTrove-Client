@@ -2,7 +2,7 @@ import Link from "next/link";
 
 import { FaUserCircle } from "react-icons/fa";
 
-const HeadMenu = () => {
+const HeadMenu = ({toggleMenu}) => {
   return (
     <div title="head" className="w-full h-auto border-b-2 border-gray-700">
       <div title="header" className="w-full h-20 flex items-center">
@@ -16,14 +16,22 @@ const HeadMenu = () => {
       </div>
       <div title="options" className="my-4 flex text-sm">
         <Link
-          href="/login"
+          href={{
+            pathname: "/authentication",
+            query: { type: "login" },
+          }}
           className="p-1 my-1 mx-1 w-1/2 text-center border border-gray-600 rounded"
+          onClick={toggleMenu}
         >
           Ingresa
         </Link>
         <Link
-          href="/signup"
+          href={{
+            pathname: "/authentication",
+            query: { type: "signup" },
+          }}
           className="p-1 my-1 mx-1 w-1/2 text-center border border-gray-600 rounded"
+          onClick={toggleMenu}
         >
           Crea tu cuenta
         </Link>

@@ -3,7 +3,7 @@ import { useState } from "react";
 import SizeForm from "./SizeForm";
 import ImageForm from "./ImageForm";
 import { VariantButtonForm } from "./Buttons";
-import { errorMessage, successFireMessage } from "@/utils/toastify";
+import { errorMessage, successFireMessage } from "@/utils/notificationToastify";
 
 const VariantForm = ({ handleVariants }) => {
   const [variant, setVariant] = useState({

@@ -1,7 +1,7 @@
 import { useRef } from "react";
 
 import { ImageButtonForm } from "./Buttons";
-import { errorMessage, successFireMessage } from "@/utils/toastify";
+import { errorMessage, successFireMessage } from "@/utils/notificationToastify";
 
 const ImageForm = ({ saveImages, imagesList, setImagesList }) => {
   const imageInputRef = useRef(null);
