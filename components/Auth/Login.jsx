@@ -22,11 +22,13 @@ const Login = ({ loginUser, saveUser }) => {
       e.preventDefault();
       const res = await loginUser(user);
       if(res !== undefined) {
+        console.log(res.data.data)
         saveUser(res.data.data);
-        notify(user, "success", "Bienvenido");
+        notify(user, "success", `Iniciaste sesion correctamente ${res.data.data.name}`);
         return
       }
     } catch (error) {
+      console.log("entro")
       notify(user, "error", error.message);
     } finally {
       setButtonIsButtonDisabled(false);

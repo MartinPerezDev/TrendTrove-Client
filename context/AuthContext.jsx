@@ -8,8 +8,12 @@ export const AuthContext = createContext();
 
 export const AuthProvider = ({ children }) => {
   const [user, setUser] = useState({});
+  const [isAdmin, setIsAdmin] =  useState(false)
+  const [tokenCokie, setTokenCokie] = useState("")
 
-  useEffect(() => {}, []);
+  useEffect(() => {
+    setTokenCokie(getToken())
+  }, []);
 
   const registerUser = async (newUser) => {
     try {
@@ -47,7 +51,10 @@ export const AuthProvider = ({ children }) => {
 
   const saveUser = async (newUser) => {
     try {
-      saveToken(newUser.token);
+      const { isAdmin, token, ...userData } = newUser
+      saveToken(token);
+      setIsAdmin(isAdmin)
+      setUser(userData)
     } catch (error) {
       const messageError =
         error.response.status === 401 ? "Contraseña incorrecta" : error.message;
@@ -56,7 +63,7 @@ export const AuthProvider = ({ children }) => {
   };
 
   return (
-    <AuthContext.Provider value={{ user, registerUser, loginUser, saveUser }}>
+    <AuthContext.Provider value={{ user, tokenCokie, isAdmin, registerUser, loginUser, saveUser }}>
       {children}
     </AuthContext.Provider>
   );
