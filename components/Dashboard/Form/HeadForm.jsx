@@ -1,5 +1,5 @@
 import { NextButtonForm } from "./Buttons";
-import { errorMessage } from "@/utils/notificationToastify";
+import { notify } from "@/utils/notificationToastify";
 
 const HeadForm = ({ dataForm, handleChange, setViewVariants }) => {
   const styleInput = "border border-gray-300 rounded p-1 mt-5";
@@ -10,7 +10,7 @@ const HeadForm = ({ dataForm, handleChange, setViewVariants }) => {
       dataForm.description === "" ||
       dataForm.category === ""
     ) {
-      errorMessage("Por favor complete todos los campos");
+      notify({}, "error", "Complete todos los campos");
       return;
     }
     setViewVariants(true);

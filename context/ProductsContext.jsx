@@ -1,11 +1,11 @@
 import { createContext, useEffect, useState } from "react";
 
 import axios from "axios";
+import axiosApiTrendTrove from "@/utils/axiosConfig";
 
 export const ProductsContext = createContext();
 
 export const ProductsProvider = ({ children }) => {
-  const URL_API = "http://192.168.0.23:8080"
   const [products, setProducts] = useState([]);
   
 
@@ -15,18 +15,18 @@ export const ProductsProvider = ({ children }) => {
 
   const addProduct = async (product) => {
     try {
-      await axios.post(`${URL_API}/api/products`, product);
+      return await axiosApiTrendTrove.post('/api/products', product);
     } catch (error) {
-      console.log(error);
+      throw new Error('No esta authorizado para realizar esta accion');
     }
   };
 
   const getProducts = async () => {
     try {
-      const res = await axios.get(`${URL_API}/api/products`);
+      const res = await axiosApiTrendTrove.get('/api/products');
       setProducts(res.data.data);
     } catch (error) {
-      console.log(error);
+      return
     }
   };
 

@@ -1,13 +1,13 @@
 import { useRef } from "react";
 
 import { ImageButtonForm } from "./Buttons";
-import { errorMessage, successFireMessage } from "@/utils/notificationToastify";
+import { notify } from "@/utils/notificationToastify";
 
 const ImageForm = ({ saveImages, imagesList, setImagesList }) => {
   const imageInputRef = useRef(null);
 
   const handleSave = (newImage) => {
-    successFireMessage("Imagen agregada correctamente");
+    notify({}, "success", "Imagen agregada");
     setImagesList((prevImages) => [...prevImages, newImage]);
     saveImages([...imagesList, newImage]);
     imageInputRef.current.value = "";
@@ -16,7 +16,7 @@ const ImageForm = ({ saveImages, imagesList, setImagesList }) => {
   const addImage = () => {
     const newImage = imageInputRef.current.value.trim();
     if (!newImage) {
-      errorMessage("Por favor ingrese una url");
+      notify({}, "error", "Ingrese al menos 1 imagen");
       return;
     }
     handleSave(newImage);

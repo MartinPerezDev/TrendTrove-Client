@@ -17,18 +17,20 @@ const Login = ({ loginUser, saveUser }) => {
     }));
   };
 
-  const handleSubmit = async(e) => {
+  const handleSubmit = async (e) => {
     try {
       e.preventDefault();
       const res = await loginUser(user);
-      if(res !== undefined) {
-        console.log(res.data.data)
+      if (res !== undefined) {
         saveUser(res.data.data);
-        notify(user, "success", `Iniciaste sesion correctamente ${res.data.data.name}`);
-        return
+        notify(
+          user,
+          "success",
+          `Iniciaste sesion correctamente ${res.data.data.name}`
+        );
+        return;
       }
     } catch (error) {
-      console.log("entro")
       notify(user, "error", error.message);
     } finally {
       setButtonIsButtonDisabled(false);

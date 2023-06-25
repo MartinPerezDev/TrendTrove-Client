@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
 
@@ -6,16 +6,18 @@ import CartWidget from "./CartWidget";
 import Menu from "./Menu";
 import { FiMenu } from "react-icons/fi";
 import { MdFavoriteBorder } from "react-icons/md";
+import { AuthContext } from "@/context/AuthContext";
 
 const NavBar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const { isAdmin, user } = useContext(AuthContext);
 
   const toggleMenu = () => setIsMenuOpen((prev) => !prev);
 
   return (
     <div className="bg-gray-900 sticky top-0 z-10">
       <nav className="h-14 max-w-screen-xl mx-auto flex text-gray-100">
-        {isMenuOpen && <Menu toggleMenu={toggleMenu} />}
+        {isMenuOpen && <Menu toggleMenu={toggleMenu} user={user} isAdmin={isAdmin} />}
         <div className="h-14 w-10 flex items-center mx-4 cursor-pointer">
           <div
             className="h-9 w-9 p-1 border border-gray-100 rounded"
@@ -36,14 +38,16 @@ const NavBar = () => {
           />
           <p className="px-2">TrendTrove</p>
         </Link>
-        <div className="flex ml-auto">
-          <div className="h-14 w-10 flex items-center mx-1 cursor-pointer">
-            <div className="h-9 w-9 p-1">
-              <MdFavoriteBorder className="h-full w-full" />
+        {user.name && (
+          <div className="flex ml-auto">
+            <div className="h-14 w-10 flex items-center mx-1 cursor-pointer">
+              <div className="h-9 w-9 p-1">
+                <MdFavoriteBorder className="h-full w-full" />
+              </div>
             </div>
+            <CartWidget />
           </div>
-          <CartWidget />
-        </div>
+        )}
       </nav>
     </div>
   );

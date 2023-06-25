@@ -6,7 +6,7 @@ import { ProductsContext } from "@/context/ProductsContext";
 import VariantForm from "./VariantForm";
 import HeadForm from "./HeadForm";
 import { ButtonForm } from "./Buttons";
-import { errorMessage, successMessage } from "@/utils/notificationToastify";
+import { notify } from "@/utils/notificationToastify";
 
 const ProductForm = () => {
   const { addProduct } = useContext(ProductsContext);
@@ -26,27 +26,35 @@ const ProductForm = () => {
     });
   };
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    if (
-      dataForm.name === "" ||
-      dataForm.description === "" ||
-      dataForm.category === "" ||
-      dataForm.variants.length === 0
-    ) {
-      errorMessage("Por favor complete todos los campos");
-      return;
+  const handleSubmit = async (e) => {
+    try {
+      e.preventDefault();
+      if (
+        dataForm.name === "" ||
+        dataForm.description === "" ||
+        dataForm.category === "" ||
+        dataForm.variants.length === 0
+      ) {
+        notify({}, "error", "Complete todos los campos");
+        return;
+      }
+      const res = await addProduct(dataForm);
+      if (res) {
+        notify({}, "success", "Producto agregado");
+
+        setDataForm({
+          name: "",
+          description: "",
+          category: "",
+          variants: [],
+        });
+        setButton(false);
+        setViewVariants(false);
+      }
+      throw new Error(res);
+    } catch (error) {
+      notify({}, "error", error.message);
     }
-    successMessage("Producto agregado correctamente");
-    addProduct(dataForm);
-    setDataForm({
-      name: "",
-      description: "",
-      category: "",
-      variants: [],
-    });
-    setButton(false);
-    setViewVariants(false);
   };
 
   const handleVariants = (variant) => {

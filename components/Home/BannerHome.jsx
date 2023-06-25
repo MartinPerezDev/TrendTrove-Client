@@ -18,8 +18,8 @@ const BannerHome = () => {
   return (
     <div className="h-full w-full">
       <Carousel {...settings}>
-          <img src="https://res.cloudinary.com/dvabcnlc4/image/upload/f_auto,q_auto/v1/TrendTrove/iss3tybx8sekysmwkri8" alt="banner nike" />
-          <img src="https://res.cloudinary.com/dvabcnlc4/image/upload/f_auto,q_auto/v1/TrendTrove/mub2ktor6ybmjnwheofc" alt="banner adidas" />
+          <img src="https://res.cloudinary.com/dvabcnlc4/image/upload/v1686273025/TrendTrove/iss3tybx8sekysmwkri8.webp" alt="banner nike" />
+          <img src="https://res.cloudinary.com/dvabcnlc4/image/upload/v1686273025/TrendTrove/mub2ktor6ybmjnwheofc.webp" alt="banner adidas" />
       </Carousel>
     </div>
   );

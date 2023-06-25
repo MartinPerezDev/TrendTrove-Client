@@ -3,7 +3,7 @@ import { useState } from "react";
 import SizeForm from "./SizeForm";
 import ImageForm from "./ImageForm";
 import { VariantButtonForm } from "./Buttons";
-import { errorMessage, successFireMessage } from "@/utils/notificationToastify";
+import { notify } from "@/utils/notificationToastify";
 
 const VariantForm = ({ handleVariants }) => {
   const [variant, setVariant] = useState({
@@ -50,10 +50,10 @@ const VariantForm = ({ handleVariants }) => {
       variant.images.length === 0 ||
       variant.sizes.length === 0
     ) {
-      errorMessage("Por favor llene todos los campos");
+      notify({}, "error", "Complete todos los campos");
       return;
     }
-    successFireMessage("Variante agregada correctamente");
+    notify({}, "success", "Variante agregada");
     setCountVariants(countVariants + 1);
     handleVariants(variant);
     setVariant({
