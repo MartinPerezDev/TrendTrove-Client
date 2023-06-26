@@ -45,6 +45,7 @@ const HeadForm = ({ dataForm, handleChange, setViewVariants }) => {
         <option value="remeras">Remeras</option>
         <option value="pantalones">Pantalones</option>
         <option value="zapatillas">Zapatillas</option>
+        <option value="camperas">Camperas</option>
       </select>
       <NextButtonForm handleNext={handleNext} />
     </>
