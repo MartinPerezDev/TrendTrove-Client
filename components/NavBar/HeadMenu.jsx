@@ -1,8 +1,17 @@
+import { useContext } from "react";
 import Link from "next/link";
 
+import { AuthContext } from "@/context/AuthContext";
 import { FaUserCircle } from "react-icons/fa";
 
 const HeadMenu = ({ toggleMenu, user }) => {
+  const { logout } = useContext(AuthContext);
+
+  const handleLogout = () => {
+    logout();
+    toggleMenu();
+  };
+
   return (
     <>
       <div title="head" className="w-full h-auto border-b-2 border-gray-700">
@@ -22,7 +31,7 @@ const HeadMenu = ({ toggleMenu, user }) => {
             <>
               <div
                 className="p-1 my-1 mx-1 w-1/2 text-center border border-gray-600 rounded hover:cursor-pointer"
-                onClick={toggleMenu}
+                onClick={handleLogout}
               >
                 Cerrar sesion
               </div>

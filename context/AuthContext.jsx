@@ -72,6 +72,25 @@ export const AuthProvider = ({ children }) => {
     }
   };
 
+  const deleteToken = () => {
+    try {
+      Cookies.remove("token");
+    } catch (error) {
+      notify(user, "error", "Error al eliminar su token");
+    }
+  }
+
+  const logout = () => {
+    try {
+      deleteToken();
+      setUser({});
+      setIsAdmin("");
+      setTokenCokie("");
+    } catch (error) {
+      notify(user, "error", "Error al cerrar sesión");
+    }
+  }
+
   const saveUser = async (newUser) => {
     try {
       const { isAdmin, token, ...userData } = newUser;
@@ -87,7 +106,7 @@ export const AuthProvider = ({ children }) => {
 
   return (
     <AuthContext.Provider
-      value={{ user, tokenCokie, isAdmin, registerUser, loginUser, saveUser }}
+      value={{ user, tokenCokie, isAdmin, registerUser, loginUser, saveUser, logout }}
     >
       {children}
     </AuthContext.Provider>

@@ -1,9 +1,11 @@
 import { useState } from "react";
+import { useRouter } from "next/router";
 
 import LoginForm from "./LoginForm";
 import { notify } from "@/utils/notificationToastify";
 
 const Login = ({ loginUser, saveUser }) => {
+  const router = useRouter();
   const [isButtonDisabled, setButtonIsButtonDisabled] = useState(false);
   const [user, setUser] = useState({
     email: "",
@@ -26,10 +28,11 @@ const Login = ({ loginUser, saveUser }) => {
         notify(
           user,
           "success",
-          `Iniciaste sesion correctamente ${res.data.data.name}`
+          "Bienvenido"
         );
-        return;
+        router.push('/');
       }
+      return;
     } catch (error) {
       notify(user, "error", error.message);
     } finally {
