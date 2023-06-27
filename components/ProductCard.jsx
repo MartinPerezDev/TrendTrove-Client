@@ -1,9 +1,10 @@
 import React from "react";
 import Image from "next/image";
+import Link from "next/link";
 
-const ProductCard = ({ name, description, variants }) => {
+const ProductCard = ({ _id, name, category, description, variants }) => {
   return (
-    <div className="w-1/2 lg:w-1/4 m-1 border rounded border-gray-400">
+    <Link href={`/detail/${_id}`} className="w-1/2 lg:w-1/4 p-2 rounded">
       <div className="w-full h-auto">
         <Image
           className="rounded"
@@ -20,7 +21,7 @@ const ProductCard = ({ name, description, variants }) => {
         <p className="text-gray-600">{description}</p>
         <p className="font-semibold">${variants[0].price}</p>
       </div>
-    </div>
+    </Link>
   );
 };
 

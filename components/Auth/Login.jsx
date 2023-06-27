@@ -22,15 +22,13 @@ const Login = ({ loginUser, saveUser }) => {
   const handleSubmit = async (e) => {
     try {
       e.preventDefault();
+      setButtonIsButtonDisabled(true);
       const res = await loginUser(user);
       if (res !== undefined) {
         saveUser(res.data.data);
-        notify(
-          user,
-          "success",
-          "Bienvenido"
-        );
-        router.push('/');
+        setUser({ email: "", password: "" });
+        notify(user, "success", "Iniciaste session correctamente");
+        router.push("/");
       }
       return;
     } catch (error) {

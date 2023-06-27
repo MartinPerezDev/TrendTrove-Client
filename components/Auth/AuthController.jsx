@@ -3,7 +3,6 @@ import { useRouter } from "next/router";
 
 import Login from "./Login";
 import Signup from "./Signup";
-import { ToastContainer } from "react-toastify";
 import { AuthContext } from "@/context/AuthContext";
 
 const AuthController = () => {
@@ -18,7 +17,6 @@ const AuthController = () => {
 
   return (
     <div>
-      <ToastContainer />
       {typeAuth === "login" ? (
         <Login loginUser={loginUser} saveUser={saveUser} />
       ) : (

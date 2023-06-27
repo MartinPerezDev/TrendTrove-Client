@@ -1,10 +1,15 @@
-import React from "react";
+import React, { useContext } from "react";
 import Head from "next/head";
 
 import NavBar from "./NavBar/NavBar";
 import Footer from "./Footer";
+import { ProductsContext } from "@/context/ProductsContext";
+import ProductsLoader from "./Loaders/ProductsLoader";
+import { ToastContainer } from "react-toastify";
 
 const Layout = ({ children, title, description, content, keywords }) => {
+  const { loadingProducts } = useContext(ProductsContext);
+
   return (
     <>
       <Head>
@@ -29,9 +34,16 @@ const Layout = ({ children, title, description, content, keywords }) => {
         <meta property="og:url" content="https://trend-trove.shop" />
         <meta property="og:type" content="product" />
       </Head>
-      <NavBar />
-      <div className="max-w-screen-xl mx-auto">{children}</div>
-      <Footer />
+      {loadingProducts ? (
+        <ProductsLoader />
+      ) : (
+        <>
+          <ToastContainer />
+          <NavBar />
+          <div className="max-w-screen-xl mx-auto">{children}</div>
+          <Footer />
+        </>
+      )}
     </>
   );
 };

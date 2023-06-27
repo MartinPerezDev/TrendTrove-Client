@@ -1,7 +1,11 @@
+import { useContext } from "react";
 import { NextButtonForm } from "./Buttons";
+
+import { ProductsContext } from "@/context/ProductsContext";
 import { notify } from "@/utils/notificationToastify";
 
 const HeadForm = ({ dataForm, handleChange, setViewVariants }) => {
+  const { categories } = useContext(ProductsContext);
   const styleInput = "border border-gray-300 rounded p-1 mt-5";
 
   const handleNext = () => {
@@ -42,10 +46,11 @@ const HeadForm = ({ dataForm, handleChange, setViewVariants }) => {
         <option value="none" disabled>
           Seleccione una categoría
         </option>
-        <option value="remeras">Remeras</option>
-        <option value="pantalones">Pantalones</option>
-        <option value="zapatillas">Zapatillas</option>
-        <option value="camperas">Camperas</option>
+        {categories.map((category, index) => (
+          <option key={category.name + index} value={category.value}>
+            {category.name}
+          </option>
+        ))}
       </select>
       <NextButtonForm handleNext={handleNext} />
     </>
