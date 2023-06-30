@@ -55,8 +55,17 @@ export const ProductsProvider = ({ children }) => {
     }
   };
 
+  const getProductById = async (id) => {
+    try {
+      const res = await axiosApiTrendTrove.get(`/api/products/${id}`);
+      return res.data.data;
+    } catch (error) {
+      return;
+    }
+  }
+
   return (
-    <ProductsContext.Provider value={{ products, categories, loadingProducts, addProduct }}>
+    <ProductsContext.Provider value={{ products, categories, loadingProducts, addProduct, getProductById }}>
       {children}
     </ProductsContext.Provider>
   );
