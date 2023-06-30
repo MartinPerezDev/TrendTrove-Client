@@ -3,6 +3,7 @@ import { useRouter } from "next/router";
 import Image from "next/image";
 
 import { ProductsContext } from "@/context/ProductsContext";
+import LoadingProduct from "./LoadingProduct";
 
 const DetailProductController = () => {
   const router = useRouter();
@@ -17,8 +18,6 @@ const DetailProductController = () => {
     setProduct(res);
     setVariant(res.variants[0]);
   };
-
-  console.log(variant);
 
   useEffect(() => {
     getProduct();
@@ -35,12 +34,13 @@ const DetailProductController = () => {
 
   return (
     <div className="px-5 py-10">
-      {product.name && (
+      {product.name ? (
         <div title="box-detail">
           <h2 className="text-2xl pb-4">{product.name}</h2>
           <div className="w-full">
             <Image
               src={variant.images[posImage]}
+              loading="lazy"
               width={400}
               height={400}
               style={{ width: "100%", height: "100%" }}
@@ -58,6 +58,8 @@ const DetailProductController = () => {
                 >
                   <Image
                     src={image}
+                    loading="lazy"
+                    quality={50}
                     width={100}
                     height={100}
                     style={{ width: "100%", height: "100%" }}
@@ -79,6 +81,8 @@ const DetailProductController = () => {
                 >
                   <Image
                     src={variant.images[0]}
+                    loading="lazy"
+                    quality={10}
                     width={100}
                     height={100}
                     style={{ width: "100%", height: "100%" }}
@@ -101,7 +105,6 @@ const DetailProductController = () => {
             ))}
           </div>
 
-          
           <div title="quantity" className="mt-5">
             <h3 className="py-2 mb-2 text-2xl">Cantidad:</h3>
             <div className="flex items-center text-gray-100 text-xl">
@@ -116,8 +119,13 @@ const DetailProductController = () => {
               <p className="text-xl">Comprar</p>
             </div>
           </div>
-          <p title="help" className="text-gray-500 mt-5 italic">Recuerde seleccionar el modelo de la prenda, la talla y la cantidad antes de presionar comprar</p>
+          <p title="help" className="text-gray-500 mt-5 italic">
+            Recuerde seleccionar el modelo de la prenda, la talla y la cantidad
+            antes de presionar comprar
+          </p>
         </div>
+      ) : (
+        <LoadingProduct />
       )}
     </div>
   );

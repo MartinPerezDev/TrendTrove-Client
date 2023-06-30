@@ -40,9 +40,7 @@ export const ProductsProvider = ({ children }) => {
   };
 
   const delayLoading = () => {
-    setTimeout(() => {
-      setLoadingProducts(false);
-    }, 2000);
+    setLoadingProducts(false);
   }
 
   const getProducts = async () => {
