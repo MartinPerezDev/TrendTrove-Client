@@ -1,9 +1,14 @@
-import { useContext, useEffect, useState } from "react";
+import { useContext, useEffect, useRef, useState } from "react";
 import { useRouter } from "next/router";
 import Image from "next/image";
 
 import { ProductsContext } from "@/context/ProductsContext";
 import LoadingProduct from "./LoadingProduct";
+import ItemCount from "./ItemCount";
+import ImageBox from "./imageBox";
+import TallesBox from "./TallesBox";
+import { validateAddProduct } from "@/utils/validationsYup";
+import { notify } from "@/utils/notificationToastify";
 
 const DetailProductController = () => {
   const router = useRouter();
@@ -12,6 +17,8 @@ const DetailProductController = () => {
   const [product, setProduct] = useState({});
   const [variant, setVariant] = useState({});
   const [posImage, setPosImage] = useState(0);
+  const [quantity, setQuantity] = useState(1);
+  const [size, setSize] = useState(undefined);
 
   const getProduct = async () => {
     const res = await getProductById(idProduct);
@@ -32,91 +39,51 @@ const DetailProductController = () => {
     setPosImage(index);
   };
 
+  const handleAddToCart = async () => {
+    try {
+      if(size === undefined) throw new Error("Debe seleccionar una talla");
+      const newProduct = {
+        _id: product._id,
+        name: variant.name,
+        description: product.description,
+        price: String(variant.price),
+        image: variant.images,
+        size: size,
+        quantity,
+      };
+      console.log(newProduct);
+      const res = await validateAddProduct(newProduct);
+      if (res) {
+        notify({}, "success", "Producto añadido al carrito");
+      }
+    } catch (error) {
+      notify({}, "error", error.message);
+    }
+  };
+
   return (
     <div className="px-5 py-10">
       {product.name ? (
         <div title="box-detail">
-          <h2 className="text-2xl pb-4">{product.name}</h2>
-          <div className="w-full">
-            <Image
-              src={variant.images[posImage]}
-              loading="lazy"
-              width={400}
-              height={400}
-              style={{ width: "100%", height: "100%" }}
-              alt={product.name}
-              className="rounded-sm"
-            />
-          </div>
-          <div title="model-box" className="mt-5">
-            <div className="flex">
-              {variant.images.map((image, index) => (
-                <div
-                  className="h-28 w-1/3 mr-1 pt-3 pr-5"
-                  key={index}
-                  onClick={() => handleImage(index)}
-                >
-                  <Image
-                    src={image}
-                    loading="lazy"
-                    quality={50}
-                    width={100}
-                    height={100}
-                    style={{ width: "100%", height: "100%" }}
-                    className="rounded"
-                    alt={product.name}
-                  />
-                </div>
-              ))}
-            </div>
-          </div>
-          <div title="variants-box" className="mt-5">
-            <h3 className="py-2">Modelos disponibles:</h3>
-            <div className="flex">
-              {product.variants.map((variant, index) => (
-                <div
-                  className="h-auto w-28 mr-5 flex flex-col "
-                  key={variant.name + index}
-                  onClick={() => handleVariant(variant)}
-                >
-                  <Image
-                    src={variant.images[0]}
-                    loading="lazy"
-                    quality={10}
-                    width={100}
-                    height={100}
-                    style={{ width: "100%", height: "100%" }}
-                    className="rounded"
-                    alt={product.name}
-                  />
-                  <p className="p-1">${variant.price}</p>
-                </div>
-              ))}
-            </div>
-          </div>
-          <div className="sizes text-2xl mt-5">
-            <h3 className="py-2 mb-2">Tallas disponibles:</h3>
-            {variant.sizes.map((size, index) => (
-              <div key={size + index} className="inline-block mr-2 text-lg">
-                <button className="bg-gray-200 hover:bg-gray-300 text-gray-800 font-bold py-2 px-4 rounded inline-flex items-center">
-                  <span className="mr-1">{size}</span>
-                </button>
-              </div>
-            ))}
-          </div>
-
-          <div title="quantity" className="mt-5">
-            <h3 className="py-2 mb-2 text-2xl">Cantidad:</h3>
-            <div className="flex items-center text-gray-100 text-xl">
-              <button className="bg-gray-900 w-10 h-10 rounded">-</button>
-              <p className="text-gray-900 px-7">{1}</p>
-              <button className="bg-gray-900 w-10 h-10 rounded">+</button>
-            </div>
-          </div>
-
+          <ImageBox
+            product={product}
+            variant={variant}
+            posImage={posImage}
+            handleImage={handleImage}
+            handleVariant={handleVariant}
+          />
+          <TallesBox variant={variant} setSize={setSize} />
+          <ItemCount
+            stock={variant.stock}
+            quantity={quantity}
+            setQuantity={setQuantity}
+          />
           <div title="button-comprar" className="flex mt-7">
-            <div className=" rounded-sm px-5 py-2 bg-gray-900 text-gray-100">
-              <p className="text-xl">Comprar</p>
+            <div
+              onClick={handleAddToCart}
+              className="rounded-sm px-5 py-2 bg-gray-900 text-gray-100"
+            >
+              <p className="text-xl">Añadir al carrito</p>
             </div>
           </div>
           <p title="help" className="text-gray-500 mt-5 italic">
