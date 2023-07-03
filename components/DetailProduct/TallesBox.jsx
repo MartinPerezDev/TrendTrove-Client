@@ -22,7 +22,7 @@ const TallesBox = ({ variant, setSize }) => {
             onClick={() => handleSize(size)}
             className={`${
               selectedSize === size
-                ? "border bg-cyan-700 text-yellow-50"
+                ? "border bg-gray-900 text-yellow-50"
                 : "border border-gray-200"
             } hover:border-gray-300 text-gray-800 font-bold py-2 px-4 rounded inline-flex items-center`}
           >

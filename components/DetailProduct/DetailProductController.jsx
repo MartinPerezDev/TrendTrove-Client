@@ -9,10 +9,12 @@ import ImageBox from "./imageBox";
 import TallesBox from "./TallesBox";
 import { validateAddProduct } from "@/utils/validationsYup";
 import { notify } from "@/utils/notificationToastify";
+import { CartContext } from "@/context/cartContext";
 
 const DetailProductController = () => {
   const router = useRouter();
   const { idProduct } = router.query;
+  const { addCart } = useContext(CartContext);
   const { getProductById } = useContext(ProductsContext);
   const [product, setProduct] = useState({});
   const [variant, setVariant] = useState({});
@@ -41,19 +43,24 @@ const DetailProductController = () => {
 
   const handleAddToCart = async () => {
     try {
-      if(size === undefined) throw new Error("Debe seleccionar una talla");
+      if (size === undefined) throw new Error("Debe seleccionar una talla");
       const newProduct = {
         _id: product._id,
-        name: variant.name,
-        description: product.description,
-        price: String(variant.price),
-        image: variant.images,
-        size: size,
-        quantity,
+        total: variant.price * quantity,
+        variants: [
+          {
+            name: variant.name,
+            description: product.description,
+            price: variant.price,
+            image: variant.images,
+            size: size,
+            quantity,
+          },
+        ],
       };
-      console.log(newProduct);
       const res = await validateAddProduct(newProduct);
       if (res) {
+        addCart(newProduct);
         notify({}, "success", "Producto añadido al carrito");
       }
     } catch (error) {

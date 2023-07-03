@@ -10,7 +10,7 @@ let productCartSchema = object({
   _id: string().required("El campo id no puede enviarse vacío"),
   name : string().required("El campo nombre no puede enviarse vacío").min(2, "El nombre debe tener al menos 2 caracteres"),
   description : string().required("El campo descripción no puede enviarse vacío").min(2, "La descripción debe tener al menos 2 caracteres"),
-  price : string().required("El campo precio no puede enviarse vacío").min(1, "El precio debe tener al menos 1 caracteres"), 
+  price : number().required("El campo precio no puede enviarse vacío").min(1, "El precio debe tener al menos 1 caracteres"), 
   size: string().required("El campo tamaño no puede enviarse vacío").min(1, "El tamaño debe tener al menos 1 caracteres"),
   images: array(),
   quantity: number().required("El campo cantidad no puede enviarse vacío").min(1, "La cantidad debe tener al menos 1 caracteres"),

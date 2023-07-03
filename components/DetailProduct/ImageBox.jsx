@@ -1,6 +1,20 @@
+import { useState } from "react";
 import Image from "next/image";
 
-const ImageBox = ({product, variant, posImage, handleImage, handleVariant}) => {
+const ImageBox = ({
+  product,
+  variant,
+  posImage,
+  handleImage,
+  handleVariant,
+}) => {
+  const [variantSelected, setVariantSelected] = useState(variant.name);
+
+  const handleSelectVariant = (variant) => {
+    setVariantSelected(variant.name);
+    handleVariant(variant);
+  };
+
   return (
     <>
       <h2 className="text-2xl pb-4">{variant.name}</h2>
@@ -44,7 +58,7 @@ const ImageBox = ({product, variant, posImage, handleImage, handleVariant}) => {
             <div
               className="h-auto w-28 mr-5 flex flex-col "
               key={variant.name + index}
-              onClick={() => handleVariant(variant)}
+              onClick={() => handleSelectVariant(variant)}
             >
               <Image
                 src={variant.images[0]}
@@ -53,7 +67,11 @@ const ImageBox = ({product, variant, posImage, handleImage, handleVariant}) => {
                 width={100}
                 height={100}
                 style={{ width: "100%", height: "100%" }}
-                className="rounded"
+                className={
+                  variantSelected === variant.name
+                    ? "border-2 border-gray-900 rounded"
+                    : "border-2 border-gray-100 rounded"
+                }
                 alt={product.name}
               />
               <p className="p-1">${variant.price}</p>
