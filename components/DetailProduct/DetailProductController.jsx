@@ -5,7 +5,7 @@ import Image from "next/image";
 import { ProductsContext } from "@/context/ProductsContext";
 import LoadingProduct from "./LoadingProduct";
 import ItemCount from "./ItemCount";
-import ImageBox from "./imageBox";
+import ImageBox from "./ImageBox";
 import TallesBox from "./TallesBox";
 import { validateAddProduct } from "@/utils/validationsYup";
 import { notify } from "@/utils/notificationToastify";
