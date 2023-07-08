@@ -2,11 +2,12 @@ import { toast } from "react-toastify"
 
 export const notify = ({ name = "unnamed" }, type, msg = false) => {
     const toastifyOptions = {
-        position: "top-right",
-        autoClose: 2000,
-        hideProgressBar: false,
+        position: "bottom-right",
+        autoClose: 1500,
+        hideProgressBar: true,
         closeOnClick: true,
         pauseOnHover: false,
+        pauseOnFocusLoss: false,
         draggable: true,
         progress: undefined,
         theme: "dark",

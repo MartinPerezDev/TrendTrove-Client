@@ -47,20 +47,18 @@ const DetailProductController = () => {
       const newProduct = {
         _id: product._id,
         total: variant.price * quantity,
-        variants: [
-          {
-            name: variant.name,
-            description: product.description,
-            price: variant.price,
-            image: variant.images,
-            size: size,
-            quantity,
-          },
-        ],
+        _idVariant: variant._id + size,
+        name: variant.name,
+        description: product.description,
+        price: variant.price,
+        image: variant.images,
+        size: size,
+        quantity,
       };
       const res = await validateAddProduct(newProduct);
       if (res) {
         addCart(newProduct);
+        setQuantity(1);
         notify({}, "success", "Producto añadido al carrito");
       }
     } catch (error) {
