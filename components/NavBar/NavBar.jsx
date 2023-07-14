@@ -17,7 +17,9 @@ const NavBar = () => {
   return (
     <div className="bg-gray-900 sticky top-0 z-10">
       <nav className="h-14 max-w-screen-xl mx-auto flex text-gray-100">
-        {isMenuOpen && <Menu toggleMenu={toggleMenu} user={user} isAdmin={isAdmin} />}
+        {isMenuOpen && (
+          <Menu toggleMenu={toggleMenu} user={user} isAdmin={isAdmin} />
+        )}
         <div className="h-14 w-10 flex items-center mx-4 cursor-pointer">
           <div
             className="h-9 w-9 p-1 border border-gray-100 rounded"
@@ -38,16 +40,14 @@ const NavBar = () => {
           />
           <p className="px-2">TrendTrove</p>
         </Link>
-        {user.name && (
-          <div className="flex ml-auto">
-            <div className="h-14 w-10 flex items-center mx-1 cursor-pointer">
-              <div className="h-9 w-9 p-1">
-                <MdFavoriteBorder className="h-full w-full" />
-              </div>
+        <div className="flex ml-auto">
+          <div className="h-14 w-10 flex items-center mx-1 cursor-pointer">
+            <div className="h-9 w-9 p-1">
+              <MdFavoriteBorder className="h-full w-full" />
             </div>
-            <CartWidget />
           </div>
-        )}
+          <CartWidget />
+        </div>
       </nav>
     </div>
   );
