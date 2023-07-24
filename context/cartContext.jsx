@@ -1,9 +1,14 @@
 import { createContext, useMemo, useState } from "react";
+import { useRouter } from "next/router";
+
+import axiosApiTrendTrove from "@/utils/axiosConfig";
+import { notify } from "@/utils/notificationToastify";
 
 export const CartContext = createContext();
 
 export const CartProvider = ({ children }) => {
   const [cart, setCart] = useState([]);
+  const router = useRouter()
 
   const addCart = (product) => {
     if (noRepeatProduct(product) === false) {
@@ -47,6 +52,26 @@ export const CartProvider = ({ children }) => {
     return false;
   };
 
+  const generateOrder = async(order) => {
+    try {
+      const res = await axiosApiTrendTrove.post("/api/orders", order);
+      if(res.status !== 201) throw Error
+      router.push(`/order/success/${res.data.data._id}`)
+    } catch (error) {
+      notify({}, "error", "Hubo un error al generar su orden");
+    }
+  }
+
+  const validateIdOrder = async(idOrder) => {
+    try {
+      const res = await axiosApiTrendTrove.get(`/api/orders/${idOrder}`);
+      if(res.status !== 200) throw Error
+      return res
+    } catch (error) {
+      return false
+    }
+  }
+
   return (
     <CartContext.Provider
       value={{
@@ -55,6 +80,8 @@ export const CartProvider = ({ children }) => {
         total: calculateTotal,
         addCart,
         deleteProduct,
+        generateOrder,
+        validateIdOrder
       }}
     >
       {children}

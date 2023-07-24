@@ -3,13 +3,13 @@ import { useRouter } from "next/router";
 import Image from "next/image";
 
 import { ProductsContext } from "@/context/ProductsContext";
-import LoadingProduct from "./LoadingProduct";
 import ItemCount from "./ItemCount";
 import ImageBox from "./ImageBox";
 import TallesBox from "./TallesBox";
 import { validateAddProduct } from "@/utils/validationsYup";
 import { notify } from "@/utils/notificationToastify";
 import { CartContext } from "@/context/cartContext";
+import Loading from "../Loading";
 
 const DetailProductController = () => {
   const router = useRouter();
@@ -51,7 +51,7 @@ const DetailProductController = () => {
         name: variant.name,
         description: product.description,
         price: variant.price,
-        image: variant.images,
+        images: variant.images,
         size: size,
         quantity,
       };
@@ -97,7 +97,7 @@ const DetailProductController = () => {
           </p>
         </div>
       ) : (
-        <LoadingProduct />
+        <Loading />
       )}
     </div>
   );

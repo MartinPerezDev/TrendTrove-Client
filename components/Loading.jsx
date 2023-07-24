@@ -1,6 +1,6 @@
 import { ClipLoader } from "react-spinners";
 
-const LoadingProduct = () => {
+const Loading = () => {
   return (
     <div className="w-full h-screen flex justify-center items-center">
       <ClipLoader
@@ -15,4 +15,4 @@ const LoadingProduct = () => {
   );
 };
 
-export default LoadingProduct;
+export default Loading;

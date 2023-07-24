@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { BsFillTrash3Fill } from "react-icons/bs";
 import { IoIosArrowForward } from "react-icons/io";
 
@@ -12,7 +13,7 @@ const Cart = ({ cart, total, deleteProduct }) => {
         <div
           className="border-2 rounded py-2 px-4 text-sm italic mt-4 relative "
           style={{
-            backgroundImage: `url(${product.image[0]})`,
+            backgroundImage: `url(${product.images[0]})`,
             backgroundSize: "30%",
             backgroundPosition: "right",
             backgroundRepeat: "no-repeat",
@@ -35,10 +36,13 @@ const Cart = ({ cart, total, deleteProduct }) => {
       ))}
       <p className="pt-5">Total de compra: ${total}</p>
       <div className="flex">
-        <div className="border-2 border-gray-600 text-gray-200 bg-gray-900 rounded px-4 py-2 mt-5 flex justify-center items-center">
+        <Link
+          href="/cart/order"
+          className="border-2 border-gray-600 text-gray-200 bg-gray-900 rounded px-4 py-2 mt-5 flex justify-center items-center"
+        >
           Continuar con la compra
           <IoIosArrowForward className="mx-1" />
-        </div>
+        </Link>
       </div>
     </div>
   );

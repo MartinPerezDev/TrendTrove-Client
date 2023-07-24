@@ -12,7 +12,11 @@ const CartController = () => {
       {quantity === 0 ? (
         <CartEmpty />
       ) : (
-        <Cart cart={cart} total={total} deleteProduct={deleteProduct} />
+        <Cart
+          cart={cart}
+          total={total}
+          deleteProduct={deleteProduct}
+        />
       )}
     </div>
   );
