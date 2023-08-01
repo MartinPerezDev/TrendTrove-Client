@@ -15,7 +15,7 @@ const NavBar = () => {
   const toggleMenu = () => setIsMenuOpen((prev) => !prev);
 
   return (
-    <div className="bg-gray-900 sticky top-0 z-10">
+    <div className="bg-gray-900 sticky top-0 z-10 select-none">
       <nav className="h-14 max-w-screen-xl mx-auto flex text-gray-100">
         {isMenuOpen && (
           <Menu toggleMenu={toggleMenu} user={user} isAdmin={isAdmin} />
@@ -34,7 +34,7 @@ const NavBar = () => {
             className="h-9 w-9 rounded"
             alt="logo trendtrove"
             loading="lazy"
-            quality={80}
+            quality={50}
             width={500}
             height={500}
           />
@@ -42,9 +42,9 @@ const NavBar = () => {
         </Link>
         <div className="flex ml-auto">
           <div className="h-14 w-10 flex items-center mx-1 cursor-pointer">
-            <div className="h-9 w-9 p-1">
+            <Link href="/user/favorites" className="h-9 w-9 p-1">
               <MdFavoriteBorder className="h-full w-full" />
-            </div>
+            </Link>
           </div>
           <CartWidget />
         </div>

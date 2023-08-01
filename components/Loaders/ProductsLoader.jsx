@@ -1,6 +1,4 @@
-import { ProductsContext } from "@/context/ProductsContext";
 import Image from "next/image";
-import React, { useContext } from "react";
 import { ScaleLoader } from "react-spinners";
 
 const ProductsLoader = () => {

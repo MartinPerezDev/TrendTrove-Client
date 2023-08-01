@@ -1,4 +1,4 @@
-import { createContext, useEffect, useState } from "react";
+import { createContext, useEffect, useRef, useState } from "react";
 
 import axiosApiTrendTrove from "@/utils/axiosConfig";
 
@@ -7,24 +7,7 @@ export const ProductsContext = createContext();
 export const ProductsProvider = ({ children }) => {
   const [loadingProducts, setLoadingProducts] = useState(true);
   const [products, setProducts] = useState([]);
-  const [categories, setCategories] = useState([
-    {
-      name: "Remeras",
-      value: "remeras",
-    },
-    {
-      name: "Zapatillas",
-      value: "zapatillas",
-    },
-    {
-      name: "Camperas",
-      value: "camperas",
-    },
-    {
-      name: "Gorras",
-      value: "gorras",
-    },
-  ]);
+  const categories = useRef(['Remeras', 'Zapatillas', 'Camperas', 'Gorras']);
 
   useEffect(() => {
     getProducts();
@@ -38,14 +21,10 @@ export const ProductsProvider = ({ children }) => {
     }
   };
 
-  const delayLoading = () => {
-    setLoadingProducts(false);
-  }
-
   const getProducts = async () => {
     try {
       const res = await axiosApiTrendTrove.get("/api/products");
-      delayLoading()
+      setLoadingProducts(false);
       setProducts(res.data.data);
     } catch (error) {
       return;
@@ -59,10 +38,18 @@ export const ProductsProvider = ({ children }) => {
     } catch (error) {
       return;
     }
-  }
+  };
 
   return (
-    <ProductsContext.Provider value={{ products, categories, loadingProducts, addProduct, getProductById }}>
+    <ProductsContext.Provider
+      value={{
+        products,
+        categories: categories.current,
+        loadingProducts,
+        addProduct,
+        getProductById,
+      }}
+    >
       {children}
     </ProductsContext.Provider>
   );

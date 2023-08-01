@@ -6,17 +6,19 @@ import { MdOutlineKeyboardArrowDown } from "react-icons/md";
 
 const HomeController = () => {
   return (
-    <div className="">
-      <div>
+    <div title="home-controller">
+      <div title="head-home">
         <BannerHome />
         <div className="flex">
           <div className="p-2 pt-5">
             <Image
               src="https://res.cloudinary.com/dvabcnlc4/image/upload/f_auto,q_auto/v1/TrendTrove/tyika4hi8rvwvlrqh87w"
-              className="rounded"
               width={150}
               height={150}
+              loading="lazy"
+              quality={50}
               alt="logo trendtrove"
+              className="rounded"
             />
           </div>
           <div className="sm:max-w-xl">
@@ -27,12 +29,12 @@ const HomeController = () => {
           </div>
         </div>
       </div>
-      <div className="mt-5 px-2">
+      <div className="mt-5 px-2" title="trending-products">
         <div className="flex items-center">
           <h3>Mas Comprados</h3>
           <MdOutlineKeyboardArrowDown className="text-2xl" />
         </div>
-        <ProductsList />
+        <ProductsList trend={true} />
       </div>
     </div>
   );
