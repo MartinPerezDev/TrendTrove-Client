@@ -1,4 +1,5 @@
-import React from "react";
+import BoxForm from "./BoxForm";
+import FooterForm from "./FooterForm";
 
 const LoginForm = ({
   handleInputChange,
@@ -6,46 +7,45 @@ const LoginForm = ({
   user,
   isButtonDisabled,
 }) => {
+  const classBoxInput = "flex flex-col w-full items-center py-2"
+  const classInput = "w-5/6 border-2 py-3 px-2 my-4 rounded-md border-none";
   return (
-    <div className="w-full py-14 flex justify-center">
-      <div className="w-5/6 my-5 py-5 flex flex-col border rounded">
-        <div
-          title="head"
-          className="w-full pt-5 flex items-center justify-center"
-        >
-          <p className="text-xl w-5/6">
-            Completa los datos para iniciar sesion
-          </p>
-        </div>
-        <form
-          onSubmit={handleSubmit}
-          className="w-full py-4 flex flex-col items-center"
-        >
+    <BoxForm title="Completa los datos para iniciar sesión">
+      <form
+        onSubmit={handleSubmit}
+        className="w-full py-4 flex flex-col items-center"
+      >
+        <div className={classBoxInput}>
+          <p className="w-5/6">EMAIL</p>
           <input
             type="email"
             onChange={handleInputChange}
             name="email"
-            placeholder="email"
+            placeholder="email@gmail.com"
             value={user.email}
-            className="w-5/6 border-2 p-1 my-4 rounded border-gray-400"
+            className={`${classInput} text-gray-800`}
           />
+        </div>
+        <div className={classBoxInput}>
+          <p className="w-5/6">CONTRASEÑA</p>
           <input
             type="password"
             onChange={handleInputChange}
             name="password"
-            placeholder="contraseña"
+            placeholder="password"
             value={user.password}
-            className="w-5/6 border-2 p-1 my-4 rounded border-gray-400"
+            className={`${classInput} text-gray-800`}
           />
-          <input
-            type="submit"
-            value="Iniciar Sesion"
-            className="w-5/6 border-2 p-1 my-4 rounded text-gray-200 border-gray-400 bg-gray-900"
-            disabled={isButtonDisabled}
-          />
-        </form>
-      </div>
-    </div>
+        </div>
+        <input
+          type="submit"
+          value="Iniciar sesión"
+          className={`${classInput} text-gray-200 bg-gray-900`}
+          disabled={isButtonDisabled}
+        />
+        <FooterForm type="login" />
+      </form>
+    </BoxForm>
   );
 };
 

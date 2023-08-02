@@ -15,26 +15,25 @@ const Signup = ({ registerUser }) => {
   });
 
   const handleInputChange = (e) => {
+    const { name, value } = e.target;
     setUser((prevUser) => ({
       ...prevUser,
-      [e.target.name]: e.target.value,
+      [name]: value,
     }));
   };
 
   const handleSubmit = async (e) => {
+    e.preventDefault();
     try {
-      e.preventDefault();
       setIsButtonDisabled(true);
       const validate = await validateForm(user, "signup");
-      if (validate === true) {
-        const res = await registerUser(user);
-        if (res !== undefined) {
-          notify(user, "success", "Usuario creado correctamente, porfavor inicie sesion");
-          router.push('/authentication?type=login')
-        }
-        return;
-      }
-      throw new Error(validate);
+      if (validate !== true) throw new Error(validate);
+
+      const res = await registerUser(user);
+      if (res === undefined) throw new Error("Hubo un error al crear su cuenta, intente de nuevo mas tarde");
+      
+      notify(user, "success", "Usuario creado correctamente, porfavor inicie sesion");
+      router.push('/authentication?type=login')
     } catch (error) {
       notify(user, "error", error.message);
     } finally {

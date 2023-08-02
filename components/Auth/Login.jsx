@@ -3,38 +3,34 @@ import { useRouter } from "next/router";
 
 import LoginForm from "./LoginForm";
 import { notify } from "@/utils/notificationToastify";
+import { validateForm } from "@/utils/validationsYup";
 
 const Login = ({ loginUser, saveUser }) => {
   const router = useRouter();
-  const [isButtonDisabled, setButtonIsButtonDisabled] = useState(false);
-  const [user, setUser] = useState({
-    email: "",
-    password: "",
-  });
+  const [isButtonDisabled, setIsButtonDisabled] = useState(false);
+  const [user, setUser] = useState({ email: "", password: "" });
 
   const handleInputChange = (e) => {
-    setUser((prevUser) => ({
-      ...prevUser,
-      [e.target.name]: e.target.value,
-    }));
+    const { name, value } = e.target;
+    setUser((prevUser) => ({ ...prevUser, [name]: value }));
   };
 
   const handleSubmit = async (e) => {
+    e.preventDefault();
     try {
-      e.preventDefault();
-      setButtonIsButtonDisabled(true);
+      setIsButtonDisabled(true);
+      const validate = await validateForm(user, "login");
+      if (validate !== true) throw new Error(validate);
       const res = await loginUser(user);
-      if (res !== undefined) {
-        saveUser(res.data.data);
-        setUser({ email: "", password: "" });
-        notify(user, "success", "Iniciaste session correctamente");
-        router.push("/");
-      }
-      return;
+      if (res === undefined) return;
+      saveUser(res.data.data);
+      setUser({ email: "", password: "" });
+      notify(user, "success", "Iniciaste session correctamente");
+      router.push("/");
     } catch (error) {
       notify(user, "error", error.message);
     } finally {
-      setButtonIsButtonDisabled(false);
+      setIsButtonDisabled(false);
     }
   };
 

@@ -9,7 +9,7 @@ const RoutesAdmin = ({ children }) => {
 
   useEffect(() => {
     if (isAdmin === "") {
-      router.push("/authentication");
+      router.push("/user/authentication");
     } else if (!isAdmin) {
       router.push("/");
     }

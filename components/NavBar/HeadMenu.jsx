@@ -40,7 +40,7 @@ const HeadMenu = ({ toggleMenu, user }) => {
             <>
               <Link
                 href={{
-                  pathname: "/authentication",
+                  pathname: "/user/authentication",
                   query: { type: "login" },
                 }}
                 className="p-1 my-1 mx-1 w-1/2 text-center border border-gray-600 rounded hover:cursor-pointer"
@@ -50,7 +50,7 @@ const HeadMenu = ({ toggleMenu, user }) => {
               </Link>
               <Link
                 href={{
-                  pathname: "/authentication",
+                  pathname: "/user/authentication",
                   query: { type: "signup" },
                 }}
                 className="p-1 my-1 mx-1 w-1/2 text-center border border-gray-600 rounded hover:cursor-pointer"
