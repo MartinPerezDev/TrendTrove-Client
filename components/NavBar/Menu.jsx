@@ -22,7 +22,7 @@ const Menu = ({ toggleMenu, user, isAdmin }) => {
         <p>Inicio</p>
       </Link>
       <Categories />
-      <Link href="/user/history" className="p-1 my-1 flex items-center">
+      <Link href="/user/orders" className="p-1 my-1 flex items-center">
         <IoReceiptOutline className="mr-2" />
         <p>Mis Compras</p>
       </Link>

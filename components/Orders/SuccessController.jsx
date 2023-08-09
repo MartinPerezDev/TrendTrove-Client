@@ -10,25 +10,27 @@ const SuccessController = () => {
   const { validateIdOrder } = useContext(CartContext);
   const router = useRouter();
   const { idOrder } = router.query;
-  const order = useRef({})
+  const order = useRef({});
 
   useEffect(() => {
-    validate()
+    validate();
   }, [idOrder]);
-  
-  const validate = async() => {
-    const res = await validateIdOrder(idOrder);
-    if(res.status === 200){
-      order.current = res.data.data
-      setLoading(false)
-    }else{
-      router.push('/')
-    }
-  }
 
-  return <div className="m-2 border rounded min-h-screen">
-    {loading ? <Loading /> : <Success order={order.current} />}
-  </div>;
+  const validate = async () => {
+    const res = await validateIdOrder(idOrder);
+    if (res.status === 200) {
+      order.current = res.data.data;
+      setLoading(false);
+    } else {
+      router.push("/");
+    }
+  };
+
+  return (
+    <div className="m-2 border rounded min-h-screen">
+      {loading ? <Loading /> : <Success order={order.current} />}
+    </div>
+  );
 };
 
 export default SuccessController;

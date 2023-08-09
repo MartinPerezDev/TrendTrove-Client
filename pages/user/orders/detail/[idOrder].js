@@ -1,5 +1,5 @@
 import Layout from "@/components/Layout";
-import SuccessController from "@/components/Cart/Order/SuccessController";
+import SuccessController from "@/components/Orders/SuccessController";
 
 export default function Home() {
   const seoHead = {

@@ -1,4 +1,4 @@
-import BoxForm from "./BoxForm";
+import BoxForm from "../BoxForm";
 import FooterForm from "./FooterForm";
 
 const SignupForm = ({
@@ -10,7 +10,7 @@ const SignupForm = ({
   const classBoxInput = "flex flex-col w-full items-center py-2";
   const classInput = "w-5/6 border-2 py-3 px-2 my-4 rounded-md border-none";
   return (
-    <BoxForm title="Completa los datos para crear tu cuenta">
+    <BoxForm title="Completa los datos para crear tu cuenta" type="signup">
       <form
         onSubmit={handleSubmit}
         className="w-full py-4 flex flex-col items-center"

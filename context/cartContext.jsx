@@ -52,12 +52,16 @@ export const CartProvider = ({ children }) => {
     return false;
   };
 
+  const resetCart = () => setCart([])
+
   const generateOrder = async(order) => {
     try {
       const res = await axiosApiTrendTrove.post("/api/orders", order);
       if(res.status !== 201) throw Error
-      router.push(`/order/success/${res.data.data._id}`)
+      resetCart()
+      router.push(`/user/orders/detail/${res.data.data._id}`)
     } catch (error) {
+      console.log(error)
       notify({}, "error", "Hubo un error al generar su orden");
     }
   }
