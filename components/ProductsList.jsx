@@ -1,11 +1,10 @@
-import { useContext, useMemo } from "react";
+import { useMemo } from "react";
 
-import { ProductsContext } from "@/context/ProductsContext";
 import ProductCard from "./ProductCard";
+import Loading from "./Loading";
 
-const ProductsList = ({ trend = false }) => {
-  const { products } = useContext(ProductsContext);
-  
+const ProductsList = ({ products, trend = false }) => {
+
   const listProducts = useMemo(() => {
     if (trend === true) {
       return products.filter((product) => product.trending !== false);
@@ -15,11 +14,17 @@ const ProductsList = ({ trend = false }) => {
   }, [products, trend]);
 
   return (
-    <div className="flex flex-wrap pt-5">
-      {listProducts.map((product) => (
-        <ProductCard key={product._id} {...product} />
-      ))}
-    </div>
+    <>
+      {products.length !== 0 ? (
+        <div className="flex flex-wrap pt-5">
+          {listProducts.map((product) => (
+            <ProductCard key={product._id} {...product} />
+          ))}
+        </div>
+      ) : (
+        <Loading />
+      )}
+    </>
   );
 };
 

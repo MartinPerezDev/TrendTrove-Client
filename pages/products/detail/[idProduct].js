@@ -3,9 +3,9 @@ import DetailProductController from "@/components/DetailProduct/DetailProductCon
 
 export default function Home() {
   const seoHead = {
-    title: "Descripcion",
-    content: "Descripcion de producto",
-    description: "Descripcion de producto",
+    title: "Detail product",
+    content: "Detail product de producto",
+    description: "Detail product de producto",
     keywords: ["trend", "trove", "moda", "ropa", "estilo", "trendtrove"],
   }
   return (

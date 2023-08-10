@@ -1,10 +1,14 @@
+import { useContext } from "react";
 import Image from "next/image";
 
 import BannerHome from "./BannerHome";
 import ProductsList from "../ProductsList";
 import { MdOutlineKeyboardArrowDown } from "react-icons/md";
+import { ProductsContext } from "@/context/ProductsContext";
 
 const HomeController = () => {
+  const { products } = useContext(ProductsContext);
+
   return (
     <div title="home-controller">
       <div title="head-home">
@@ -34,7 +38,7 @@ const HomeController = () => {
           <h3>Mas Comprados</h3>
           <MdOutlineKeyboardArrowDown className="text-2xl" />
         </div>
-        <ProductsList trend={true} />
+        <ProductsList products={products} trend={true} />
       </div>
     </div>
   );

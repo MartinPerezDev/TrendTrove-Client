@@ -3,7 +3,7 @@ import Link from "next/link";
 import HeadMenu from "./HeadMenu";
 import Categories from "./Categories";
 import { LuPanelRightClose } from "react-icons/lu";
-import { IoReceiptOutline } from "react-icons/io5";
+import { IoReceiptOutline, IoShirtOutline } from "react-icons/io5";
 import { BsInfoCircle } from "react-icons/bs";
 import { AiOutlineHome } from "react-icons/ai";
 
@@ -21,7 +21,11 @@ const Menu = ({ toggleMenu, user, isAdmin }) => {
         <AiOutlineHome className="mr-2" />
         <p>Inicio</p>
       </Link>
-      <Categories />
+      <Link href="/products" className="p-1 my-1 flex items-center">
+        <IoShirtOutline className="mr-2" />
+        <p>Productos</p>
+      </Link>
+      <Categories toggleMenu={toggleMenu} />
       <Link href="/user/orders" className="p-1 my-1 flex items-center">
         <IoReceiptOutline className="mr-2" />
         <p>Mis Compras</p>

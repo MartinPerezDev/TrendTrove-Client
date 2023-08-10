@@ -1,13 +1,14 @@
 import { createContext, useEffect, useRef, useState } from "react";
 
 import axiosApiTrendTrove from "@/utils/axiosConfig";
+import { notify } from "@/utils/notificationToastify";
 
 export const ProductsContext = createContext();
 
 export const ProductsProvider = ({ children }) => {
   const [loadingProducts, setLoadingProducts] = useState(true);
   const [products, setProducts] = useState([]);
-  const categories = useRef(['Remeras', 'Zapatillas', 'Camperas', 'Gorras']);
+  const categories = useRef(["Remeras", "Zapatillas", "Camperas", "Gorras"]);
 
   useEffect(() => {
     getProducts();
@@ -27,7 +28,7 @@ export const ProductsProvider = ({ children }) => {
       setLoadingProducts(false);
       setProducts(res.data.data);
     } catch (error) {
-      return;
+      return false;
     }
   };
 
@@ -36,7 +37,18 @@ export const ProductsProvider = ({ children }) => {
       const res = await axiosApiTrendTrove.get(`/api/products/${id}`);
       return res.data.data;
     } catch (error) {
-      return;
+      return false;
+    }
+  };
+
+  const getProductsByCategory = async (category) => {
+    try {
+      const res = await axiosApiTrendTrove.get(
+        `/api/products/category/${category}`
+      );
+      return res.data.data;
+    } catch (error) {
+      console.log(error)
     }
   };
 
@@ -48,6 +60,7 @@ export const ProductsProvider = ({ children }) => {
         loadingProducts,
         addProduct,
         getProductById,
+        getProductsByCategory,
       }}
     >
       {children}
