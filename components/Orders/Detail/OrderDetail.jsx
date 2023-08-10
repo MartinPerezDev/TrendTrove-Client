@@ -2,7 +2,7 @@ import BoxForm from "@/components/BoxForm";
 import Link from "next/link";
 import { useRouter } from "next/router";
 
-const Success = ({ order }) => {
+const OrderDetail = ({ order }) => {
   const router = useRouter();
 
   const formatDate = (date) => {
@@ -74,4 +74,4 @@ const Success = ({ order }) => {
   );
 };
 
-export default Success;
+export default OrderDetail;

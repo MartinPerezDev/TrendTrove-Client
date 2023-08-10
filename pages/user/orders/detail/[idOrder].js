@@ -1,5 +1,5 @@
 import Layout from "@/components/Layout";
-import SuccessController from "@/components/Orders/SuccessController";
+import OrderDetailController from "@/components/Orders/Detail/OrderDetailController";
 
 export default function Home() {
   const seoHead = {
@@ -10,7 +10,7 @@ export default function Home() {
   }
   return (
     <Layout {...seoHead}>
-      <SuccessController />
+      <OrderDetailController />
     </Layout>
   );
 }

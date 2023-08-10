@@ -1,11 +1,11 @@
 import { useContext, useEffect, useRef, useState } from "react";
 import { useRouter } from "next/router";
 
-import Success from "./Success";
 import { CartContext } from "@/context/cartContext";
 import Loading from "@/components/Loading";
+import OrderDetail from "./OrderDetail";
 
-const SuccessController = () => {
+const OrderDetailController = () => {
   const [loading, setLoading] = useState(true);
   const { validateIdOrder } = useContext(CartContext);
   const router = useRouter();
@@ -28,9 +28,9 @@ const SuccessController = () => {
 
   return (
     <div className="m-2 border rounded min-h-screen">
-      {loading ? <Loading /> : <Success order={order.current} />}
+      {loading ? <Loading /> : <OrderDetail order={order.current} />}
     </div>
   );
 };
 
-export default SuccessController;
+export default OrderDetailController;

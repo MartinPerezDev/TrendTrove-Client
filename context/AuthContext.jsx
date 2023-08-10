@@ -11,24 +11,24 @@ export const AuthProvider = ({ children }) => {
   const [isAdmin, setIsAdmin] = useState("");
   const [tokenCokie, setTokenCokie] = useState("");
 
-  useEffect(()=>{
+  useEffect(() => {
     const token = getToken();
     if (token) {
       getUser(token);
     }
   }, []);
-  
+
   const getUser = async (token) => {
     try {
       setAuthToken(token);
-      const user = await axiosApiTrendTrove.get('/api/users')
-      setUser(user.data.data)
-      setIsAdmin(user.data.data.isAdmin)
-      setTokenCokie(token)
+      const user = await axiosApiTrendTrove.get("/api/users");
+      setUser(user.data.data);
+      setIsAdmin(user.data.data.isAdmin);
+      setTokenCokie(token);
     } catch (error) {
       notify(user, "error", error);
     }
-  }
+  };
 
   const registerUser = async (newUser) => {
     try {
@@ -78,7 +78,7 @@ export const AuthProvider = ({ children }) => {
     } catch (error) {
       notify(user, "error", "Error al eliminar su token");
     }
-  }
+  };
 
   const logout = () => {
     try {
@@ -89,7 +89,7 @@ export const AuthProvider = ({ children }) => {
     } catch (error) {
       notify(user, "error", "Error al cerrar sesión");
     }
-  }
+  };
 
   const saveUser = async (newUser) => {
     try {
@@ -104,9 +104,29 @@ export const AuthProvider = ({ children }) => {
     }
   };
 
+  const getOrdersUser = async () => {
+    try {
+      if (user.email === "") throw Error
+      const orders = await axiosApiTrendTrove.get(`/api/orders/user/${user.email}`)
+      if (orders.length === 0) throw Error
+      return orders.data.data
+    } catch (error) {
+      notify( user, "error", "Error al obtener sus ordenes, ingrese a su cuenta e intente nuevamente mas tarde");
+    }
+  };
+
   return (
     <AuthContext.Provider
-      value={{ user, tokenCokie, isAdmin, registerUser, loginUser, saveUser, logout }}
+      value={{
+        user,
+        tokenCokie,
+        isAdmin,
+        registerUser,
+        loginUser,
+        saveUser,
+        logout,
+        getOrdersUser
+      }}
     >
       {children}
     </AuthContext.Provider>
