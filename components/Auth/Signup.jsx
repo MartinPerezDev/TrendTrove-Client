@@ -33,7 +33,7 @@ const Signup = ({ registerUser }) => {
       if (res === undefined) throw new Error("Hubo un error al crear su cuenta, intente de nuevo mas tarde");
       
       notify(user, "success", "Usuario creado correctamente, porfavor inicie sesion");
-      router.push('/authentication?type=login')
+      router.push('/user/authentication?type=login')
     } catch (error) {
       notify(user, "error", error.message);
     } finally {

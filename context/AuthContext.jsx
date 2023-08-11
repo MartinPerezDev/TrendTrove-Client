@@ -108,7 +108,6 @@ export const AuthProvider = ({ children }) => {
     try {
       if (user.email === "") throw Error
       const orders = await axiosApiTrendTrove.get(`/api/orders/user/${user.email}`)
-      if (orders.length === 0) throw Error
       return orders.data.data
     } catch (error) {
       notify( user, "error", "Error al obtener sus ordenes, ingrese a su cuenta e intente nuevamente mas tarde");

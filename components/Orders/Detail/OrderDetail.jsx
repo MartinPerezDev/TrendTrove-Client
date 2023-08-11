@@ -1,21 +1,9 @@
-import BoxForm from "@/components/BoxForm";
 import Link from "next/link";
-import { useRouter } from "next/router";
+
+import BoxForm from "@/components/BoxForm";
+import { formatDate } from "@/utils/utilsFunctions";
 
 const OrderDetail = ({ order }) => {
-  const router = useRouter();
-
-  const formatDate = (date) => {
-    const newDate = new Date(date);
-    return `${newDate.getDate()}/${
-      newDate.getMonth() + 1
-    }/${newDate.getFullYear()}`;
-  };
-
-  const reedirection = (path) => {
-    router.push(path);
-  };
-
   return (
     <BoxForm type="order-success">
       <div className="w-full h-full py-5 px-2">
@@ -36,23 +24,26 @@ const OrderDetail = ({ order }) => {
           <b>Listado de productos</b>
         </h3>
         {order.products.map((product, index) => (
-          <div
-            className="border-2 rounded py-2 px-4 text-sm italic mt-4 relative "
-            style={{
-              backgroundImage: `url(${product.images[0]})`,
-              backgroundSize: "30%",
-              backgroundPosition: "right",
-              backgroundRepeat: "no-repeat",
-            }}
+          <Link
+            href={`/products/detail/${product._id}`}
             key={product.name + index}
-            onClick={() => reedirection(`/products/detail/${product._id}`)}
           >
-            <p className="text-base font-bold not-italic">{product.name}</p>
-            <p>Cantidad: {product.quantity}</p>
-            <p>Talle: {product.size}</p>
-            <p>Precio unitario: ${product.price}</p>
-            <p>Precio total: ${product.total}</p>
-          </div>
+            <div
+              className="border-2 rounded py-2 px-4 text-sm italic mt-4 relative "
+              style={{
+                backgroundImage: `url(${product.images[0]})`,
+                backgroundSize: "30%",
+                backgroundPosition: "right",
+                backgroundRepeat: "no-repeat",
+              }}
+            >
+              <p className="text-base font-bold not-italic">{product.name}</p>
+              <p>Cantidad: {product.quantity}</p>
+              <p>Talle: {product.size}</p>
+              <p>Precio unitario: ${product.price}</p>
+              <p>Precio total: ${product.total}</p>
+            </div>
+          </Link>
         ))}
         <p className="pt-5">
           <b>Total de compra: </b>${order.payment.total}
