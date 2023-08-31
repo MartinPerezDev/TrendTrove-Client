@@ -1,12 +1,16 @@
-import React, { useState } from "react";
+import { useEffect, useState } from "react";
 
-const TallesBox = ({ variant, setSize }) => {
-  const [selectedSize, setSelectedSize] = useState(null);
+const TallesBox = ({ variant, size, setSize }) => {
+  const [selectedSize, setSelectedSize] = useState(undefined);
+
+  useEffect(()=>{
+    setSelectedSize(size)
+  }, [size])
 
   const handleSize = (size) => {
     if (size === selectedSize) {
-      setSelectedSize(null); // Deseleccionar el tamaño si ya está seleccionado
-      setSize(null); // Limpiar el tamaño seleccionado en la función setSize
+      setSelectedSize(undefined);
+      setSize(undefined);
     } else {
       setSelectedSize(size);
       setSize(size);

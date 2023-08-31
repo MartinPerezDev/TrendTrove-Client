@@ -1,6 +1,5 @@
-import { useContext, useEffect, useRef, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { useRouter } from "next/router";
-import Image from "next/image";
 
 import { ProductsContext } from "@/context/ProductsContext";
 import ItemCount from "./ItemCount";
@@ -10,29 +9,31 @@ import { validateAddProduct } from "@/utils/validationsYup";
 import { notify } from "@/utils/notificationToastify";
 import { CartContext } from "@/context/cartContext";
 import Loading from "../Loading";
+import IconFavorite from "./IconFavorite";
 
 const DetailProductController = () => {
   const router = useRouter();
   const { idProduct } = router.query;
   const { addCart } = useContext(CartContext);
   const { getProductById } = useContext(ProductsContext);
+
   const [product, setProduct] = useState({});
   const [variant, setVariant] = useState({});
   const [posImage, setPosImage] = useState(0);
   const [quantity, setQuantity] = useState(1);
   const [size, setSize] = useState(undefined);
 
-  const getProduct = async () => {
-    const res = await getProductById(idProduct);
-    setProduct(res);
-    setVariant(res.variants[0]);
-  };
-
   useEffect(() => {
+    const getProduct = async () => {
+      const res = await getProductById(idProduct);
+      setProduct(res);
+      setVariant(res.variants[0]);
+    };
     getProduct();
-  }, [idProduct]);
+  }, [idProduct, getProductById]);
 
   const handleVariant = (variant) => {
+    setSize(undefined)
     setVariant(variant);
     setPosImage(0);
   };
@@ -43,7 +44,7 @@ const DetailProductController = () => {
 
   const handleAddToCart = async () => {
     try {
-      if (size === undefined) throw new Error("Debe seleccionar una talla");
+      if (!size) return notify({}, "error", "Debe seleccionar una talla")
       const newProduct = {
         _id: product._id,
         total: variant.price * quantity,
@@ -62,7 +63,7 @@ const DetailProductController = () => {
         notify({}, "success", "Producto añadido al carrito");
       }
     } catch (error) {
-      notify({}, "error", error.message);
+      notify({}, "error", "Error al añadir este producto al carrito");
     }
   };
 
@@ -70,6 +71,10 @@ const DetailProductController = () => {
     <div className="px-5 py-10">
       {product.name ? (
         <div title="box-detail">
+          <div title="title & favorite" className="flex">
+            <h2 className="text-2xl w-5/6 flex items-start">{variant.name}</h2>
+            <IconFavorite idProduct={idProduct} product={product} />
+          </div>
           <ImageBox
             product={product}
             variant={variant}
@@ -77,7 +82,7 @@ const DetailProductController = () => {
             handleImage={handleImage}
             handleVariant={handleVariant}
           />
-          <TallesBox variant={variant} setSize={setSize} />
+          <TallesBox variant={variant} setSize={setSize} size={size} />
           <ItemCount
             stock={variant.stock}
             quantity={quantity}

@@ -17,7 +17,6 @@ const ImageBox = ({
 
   return (
     <>
-      <h2 className="text-2xl pb-4">{variant.name}</h2>
       <div className="w-full">
         <Image
           src={variant.images[posImage]}
@@ -33,7 +32,7 @@ const ImageBox = ({
         <div className="flex">
           {variant.images.map((image, index) => (
             <div
-              className="h-28 w-1/3 mr-1 pt-3 pr-5"
+              className="h-auto w-1/3 mr-1 pt-3 pr-5"
               key={index}
               onClick={() => handleImage(index)}
             >
