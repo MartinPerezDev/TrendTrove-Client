@@ -42,7 +42,7 @@ const NavBar = () => {
         </Link>
         <div className="flex ml-auto">
           <div className="h-14 w-10 flex items-center mx-1 cursor-pointer">
-            <Link href="/user/favorites" className="h-9 w-9 p-1">
+            <Link href="/user/wishlist" className="h-9 w-9 p-1">
               <MdFavoriteBorder className="h-full w-full" />
             </Link>
           </div>

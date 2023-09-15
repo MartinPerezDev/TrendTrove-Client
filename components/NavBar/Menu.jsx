@@ -6,6 +6,7 @@ import { LuPanelRightClose } from "react-icons/lu";
 import { IoReceiptOutline, IoShirtOutline } from "react-icons/io5";
 import { BsInfoCircle } from "react-icons/bs";
 import { AiOutlineHome } from "react-icons/ai";
+import {MdFavoriteBorder} from "react-icons/md"
 
 const Menu = ({ toggleMenu, user, isAdmin }) => {
   return (
@@ -26,10 +27,26 @@ const Menu = ({ toggleMenu, user, isAdmin }) => {
         <p>Productos</p>
       </Link>
       <Categories toggleMenu={toggleMenu} />
-      <Link href="/user/orders" onClick={toggleMenu} className="p-1 my-1 flex items-center">
-        <IoReceiptOutline className="mr-2" />
-        <p>Mis Compras</p>
-      </Link>
+      {user.email && (
+        <>
+          <Link
+            href="/user/wishlist"
+            onClick={toggleMenu}
+            className="p-1 my-1 flex items-center"
+          >
+            <MdFavoriteBorder className="mr-2" />
+            <p>Mis Favoritos</p>
+          </Link>
+          <Link
+            href="/user/orders"
+            onClick={toggleMenu}
+            className="p-1 my-1 flex items-center"
+          >
+            <IoReceiptOutline className="mr-2" />
+            <p>Mis Compras</p>
+          </Link>
+        </>
+      )}
       <Link href="/about" className="p-1 my-1 flex items-center">
         <BsInfoCircle className="mr-2" />
         <p>Sobre Nosotros</p>
