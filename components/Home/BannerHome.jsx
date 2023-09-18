@@ -5,41 +5,7 @@ import { Carousel } from "react-responsive-carousel";
 import "react-responsive-carousel/lib/styles/carousel.min.css";
 
 const BannerHome = () => {
-  const [quality, setQuality] = useState(80);
-  const images = [
-    {
-      src: "https://res.cloudinary.com/dvabcnlc4/image/upload/v1686273025/TrendTrove/iss3tybx8sekysmwkri8.webp",
-      alt: "banner adidas",
-    },
-    {
-      src: "https://res.cloudinary.com/dvabcnlc4/image/upload/v1686273025/TrendTrove/mub2ktor6ybmjnwheofc.webp",
-      alt: "banner nike",
-    },
-  ];
-
-  useEffect(() => {
-    const handleResize = () => {
-      const screenWidth = window.innerWidth;
-      setQuality(screenWidth > 1200 ? 100 : 80);
-    };
-
-    handleResize();
-
-    window.addEventListener("resize", handleResize);
-
-    return () => window.removeEventListener("resize", handleResize);
-  }, []);
-
-  const settings = {
-    autoPlay: true,
-    infiniteLoop: true,
-    showStatus: false,
-    showThumbs: false,
-    showIndicators: false,
-    stopOnHover: false,
-    interval: 5000,
-    showArrows: false,
-  };
+  
 
   return (
     <Carousel {...settings}>
