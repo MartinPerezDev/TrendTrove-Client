@@ -1,19 +1,15 @@
-import { useContext } from "react";
-
-import ProductsList from "../ProductsList";
-import { MdOutlineKeyboardArrowDown } from "react-icons/md";
-import { ProductsContext } from "@/context/ProductsContext";
 import BannerHomeController from "./Banner/BannerHomeController";
 import StepsToBuy from "./StepsToBuy";
+import Comments from "./Comments";
 
 const HomeController = () => {
-  const { products } = useContext(ProductsContext);
 
   return (
     <div title="home-controller">
       <div title="head-home">
         <BannerHomeController />
         <StepsToBuy />
+        <Comments />
       </div>
       {/*
         <div className="mt-5 px-2" title="trending-products">
