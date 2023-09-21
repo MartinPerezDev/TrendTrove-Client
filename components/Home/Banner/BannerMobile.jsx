@@ -21,8 +21,8 @@ const BannerMobile = () => {
       </div>
       <Image
         className="h-1/3"
-        src="https://res.cloudinary.com/dvabcnlc4/image/upload/v1694825883/TrendTrove/xgbl2uzgdreqcvq1cv15.png"
-        width={150}
+        src="https://res.cloudinary.com/dvabcnlc4/image/upload/v1695078077/TrendTrove/first_banner_bo8uqr.png"
+        width={280}
         height={100}
         alt="smartphone"
       />
