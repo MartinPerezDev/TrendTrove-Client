@@ -1,25 +1,35 @@
-import BannerHomeController from "./Banner/BannerHomeController";
+import { useEffect, useState } from "react";
+
 import StepsToBuy from "./StepsToBuy";
 import Comments from "./Comments";
+import Banner from "./Banner";
+import SlideProducts from "./SlideProducts";
 
 const HomeController = () => {
+
+  const [isMobile, setIsMobile ] = useState(true)
+
+  useEffect(() => {
+    const handleResize = () => {
+      const screenWidth = window.innerWidth;
+      setIsMobile(screenWidth >= 1024 ? false : true);
+    };
+
+    handleResize();
+
+    window.addEventListener("resize", handleResize);
+
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
 
   return (
     <div title="home-controller">
       <div title="head-home">
-        <BannerHomeController />
+        <Banner isMobile={isMobile} />
         <StepsToBuy />
-        <Comments />
+        <Comments isMobile={isMobile} />
+        <SlideProducts isMobile={isMobile} />
       </div>
-      {/*
-        <div className="mt-5 px-2" title="trending-products">
-          <div className="flex items-center">
-            <h3>Mas Comprados</h3>
-            <MdOutlineKeyboardArrowDown className="text-2xl" />
-          </div>
-          <ProductsList products={products} trend={true} />
-        </div>
-      */}
     </div>
   );
 };
