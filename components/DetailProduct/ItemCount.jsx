@@ -20,7 +20,7 @@ const ItemCount = ({ stock, quantity, setQuantity }) => {
 
   return (
     <div title="quantity" className="mt-5">
-      <h3 className="py-2 mb-2 text-2xl">Cantidad:</h3>
+      <p className="py-2 mb-2 text-xl">Cantidad:</p>
       <div className="flex items-center text-gray-100 text-xl">
         <button
           onClick={handleSubtract}

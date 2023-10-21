@@ -33,7 +33,7 @@ const DetailProductController = () => {
   }, [idProduct, getProductById]);
 
   const handleVariant = (variant) => {
-    setSize(undefined)
+    setSize(undefined);
     setVariant(variant);
     setPosImage(0);
   };
@@ -44,7 +44,7 @@ const DetailProductController = () => {
 
   const handleAddToCart = async () => {
     try {
-      if (!size) return notify({}, "error", "Debe seleccionar una talla")
+      if (!size) return notify({}, "error", "Debe seleccionar una talla");
       const newProduct = {
         _id: product._id,
         total: variant.price * quantity,
@@ -70,36 +70,48 @@ const DetailProductController = () => {
   return (
     <div className="px-5 py-10">
       {product.name ? (
-        <div title="box-detail">
-          <div title="title & favorite" className="flex">
-            <h2 className="text-2xl w-5/6 flex items-start">{variant.name}</h2>
-            <IconFavorite idProduct={idProduct} product={product} />
-          </div>
-          <ImageBox
-            product={product}
-            variant={variant}
-            posImage={posImage}
-            handleImage={handleImage}
-            handleVariant={handleVariant}
-          />
-          <TallesBox variant={variant} setSize={setSize} size={size} />
-          <ItemCount
-            stock={variant.stock}
-            quantity={quantity}
-            setQuantity={setQuantity}
-          />
-          <div title="button-comprar" className="flex mt-7">
-            <div
-              onClick={handleAddToCart}
-              className="rounded-sm px-5 py-2 bg-gray-900 text-gray-100"
-            >
-              <p className="text-xl">Añadir al carrito</p>
+        <div title="box-detail-product" className="flex flex-col md:flex-row">
+          <div className="md:w-1/2" title="box-image-product">
+            <div title="title & favorite" className="flex">
+              <h2 className="text-2xl w-5/6 flex items-start">
+                {variant.name}
+              </h2>
+              <IconFavorite idProduct={idProduct} product={product} />
             </div>
+            <ImageBox
+              product={product}
+              variant={variant}
+              posImage={posImage}
+              handleImage={handleImage}
+              handleVariant={handleVariant}
+            />
           </div>
-          <p title="help" className="text-gray-500 mt-5 italic">
-            Recuerde seleccionar el modelo de la prenda, la talla y la cantidad
-            antes de presionar comprar
-          </p>
+          <div className="md:w-1/2 md:px-10" title="box-text-product">
+            <TallesBox variant={variant} setSize={setSize} size={size} />
+            <ItemCount
+              stock={variant.stock}
+              quantity={quantity}
+              setQuantity={setQuantity}
+            />
+            <div title="button-comprar" className="flex mt-7 cursor-pointer">
+              <div
+                onClick={handleAddToCart}
+                className="rounded-sm px-5 py-2 bg-gray-900 text-gray-100"
+              >
+                <p className="text-xl">Añadir al carrito</p>
+              </div>
+            </div>
+            <p title="help" className="text-gray-500 mt-5 italic">
+              Recuerde seleccionar el modelo de la prenda, la talla y la
+              cantidad antes de presionar comprar
+            </p>
+            <p title="description" className="pt-5">
+              Remera masculina holgada, de tejido de punto, jersey de algodón
+              24/1. Manga corta, con cuello redondo. Estampa en el pecho con
+              identificación de marca a un color. Composición: 100% algodón.
+              ALTURA: 1,83, PECHO: 102, CINTURA: 80, CADERA: 102.TALLE: M.
+            </p>
+          </div>
         </div>
       ) : (
         <Loading />

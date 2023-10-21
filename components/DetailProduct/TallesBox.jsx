@@ -18,8 +18,8 @@ const TallesBox = ({ variant, size, setSize }) => {
   };
 
   return (
-    <div className="sizes text-2xl mt-5">
-      <h3 className="py-2 mb-2">Tallas disponibles:</h3>
+    <div className="sizes text-xl mt-5">
+      <p className="py-2 mb-2">Tallas disponibles:</p>
       {variant.sizes.map((size, index) => (
         <div key={size + index} className="inline-block mr-2 text-lg">
           <button

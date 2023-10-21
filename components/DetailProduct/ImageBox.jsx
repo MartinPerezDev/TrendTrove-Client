@@ -32,7 +32,7 @@ const ImageBox = ({
         <div className="flex">
           {variant.images.map((image, index) => (
             <div
-              className="h-auto w-1/3 mr-1 pt-3 pr-5"
+              className="h-auto w-1/3 mr-1 pt-3 pr-5 cursor-pointer"
               key={index}
               onClick={() => handleImage(index)}
             >
@@ -51,11 +51,11 @@ const ImageBox = ({
         </div>
       </div>
       <div title="variants-box" className="mt-5">
-        <h3 className="py-2">Modelos disponibles:</h3>
+        <h3 className="py-2 text-xl">Modelos disponibles:</h3>
         <div className="flex">
           {product.variants.map((variant, index) => (
             <div
-              className="h-auto w-28 mr-5 flex flex-col "
+              className="h-auto w-28 mr-5 flex flex-col cursor-pointer"
               key={variant.name + index}
               onClick={() => handleSelectVariant(variant)}
             >
