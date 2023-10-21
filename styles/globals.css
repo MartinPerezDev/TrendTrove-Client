@@ -23,3 +23,6 @@ body {
   background: rgb(17,24,39);
   background: linear-gradient(180deg, rgba(17,24,39,1) 0%, rgba(27,43,75,1) 86%, rgba(8,108,129,1) 100%);
 }
+.custom-gradient-buttons{
+  background: linear-gradient(to right, #1f72b5, #211049);
+}

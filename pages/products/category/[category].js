@@ -1,5 +1,5 @@
 import Layout from "@/components/Layout";
-import CategoryController from "@/components/CategoryProducts/CategoryController";
+import ProductsController from "@/components/Products/ProductsController";
 
 export default function Home() {
   const seoHead = {
@@ -10,7 +10,7 @@ export default function Home() {
   }
   return (
     <Layout {...seoHead}>
-      <CategoryController />
+      <ProductsController type="category" />
     </Layout>
   );
 }

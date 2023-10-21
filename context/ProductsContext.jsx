@@ -1,7 +1,6 @@
 import { createContext, useEffect, useRef, useState } from "react";
 
 import axiosApiTrendTrove from "@/utils/axiosConfig";
-import { notify } from "@/utils/notificationToastify";
 
 export const ProductsContext = createContext();
 
