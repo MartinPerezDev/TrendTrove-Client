@@ -10,31 +10,37 @@ const Cart = ({ cart, total, deleteProduct }) => {
       <p className="text-gray-500 pt-2 italic text-sm">
         Revise bien su compra antes de continuar
       </p>
-      {cart.map(({images, name, _idVariant, quantity, size, price, total}, index) => (
-        <div
-          className="border-2 rounded py-2 px-4 text-sm italic mt-4 relative "
-          style={{
-            backgroundImage: `url(${images[0]})`,
-            backgroundSize: "30%",
-            backgroundPosition: "right",
-            backgroundRepeat: "no-repeat",
-          }}
-          key={name + index}
-        >
-          <div
-            title="trash"
-            onClick={() => deleteProduct(_idVariant)}
-            className="absolute right-0 top-0 rounded bg-red-500 w-10 h-10"
-          >
-            <BsFillTrash3Fill className="w-10 h-10 p-2" color="white" />
-          </div>
-          <p className="text-base font-bold not-italic">{name}</p>
-          <p>Cantidad: {quantity}</p>
-          <p>Talle: {size}</p>
-          <p>Precio unitario: ${price}</p>
-          <p>Precio total: ${total}</p>
-        </div>
-      ))}
+      {cart.map(
+        (
+          { images, name, _id, _idVariant, quantity, size, price, total },
+          index
+        ) => (
+          <Link href={`/products/detail/${_id}`} key={name + index}>
+            <div
+              className="border-2 rounded py-2 px-4 text-sm italic mt-4 relative "
+              style={{
+                backgroundImage: `url(${images[0]})`,
+                backgroundSize: "30%",
+                backgroundPosition: "right",
+                backgroundRepeat: "no-repeat",
+              }}
+            >
+              <div
+                title="trash"
+                onClick={(e) => deleteProduct(e, _idVariant)}
+                className="absolute right-0 top-0 rounded bg-red-500 w-10 h-10 cursor-pointer"
+              >
+                <BsFillTrash3Fill className="w-10 h-10 p-2" color="white" />
+              </div>
+              <p className="text-base font-bold not-italic">{name}</p>
+              <p>Cantidad: {quantity}</p>
+              <p>Talle: {size}</p>
+              <p>Precio unitario: ${price}</p>
+              <p>Precio total: ${total}</p>
+            </div>
+          </Link>
+        )
+      )}
       <p className="pt-5">Total de compra: ${total}</p>
       <div className="flex flex-col w-4/6 justify-center items-start">
         <Link

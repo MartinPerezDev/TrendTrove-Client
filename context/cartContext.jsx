@@ -26,7 +26,8 @@ export const CartProvider = ({ children }) => {
 
   const calculatePriceProduct = (product) => product.price * product.quantity;
 
-  const deleteProduct = (_idVariant) => {
+  const deleteProduct = (e, _idVariant) => {
+    e.preventDefault()
     const newCart = cart.filter((product) => product._idVariant !== _idVariant);
     setCart(newCart);
   };
