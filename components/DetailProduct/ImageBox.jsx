@@ -15,6 +15,8 @@ const ImageBox = ({
     handleVariant(variant);
   };
 
+  const windowWidth = window.innerWidth
+
   return (
     <>
       <div className="w-full">
@@ -34,12 +36,12 @@ const ImageBox = ({
             <div
               className="h-auto w-1/3 mr-1 pt-3 pr-5 cursor-pointer"
               key={index}
-              onClick={() => handleImage(index)}
+              onMouseEnter={() => handleImage(index)}
             >
               <Image
                 src={image}
                 loading="lazy"
-                quality={50}
+                quality={windowWidth < 768 ? 50 : 80}
                 width={100}
                 height={100}
                 style={{ width: "100%", height: "100%" }}
@@ -62,7 +64,7 @@ const ImageBox = ({
               <Image
                 src={variant.images[0]}
                 loading="lazy"
-                quality={10}
+                quality={windowWidth < 768 ? 10 : 40}
                 width={100}
                 height={100}
                 style={{ width: "100%", height: "100%" }}
