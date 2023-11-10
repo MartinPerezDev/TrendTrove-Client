@@ -40,7 +40,7 @@ const LoginForm = ({
         <input
           type="submit"
           value="Iniciar sesión"
-          className={`${classInput} text-gray-200 bg-gray-900`}
+          className={`${classInput} text-gray-200 bg-gray-900 cursor-pointer`}
           disabled={isButtonDisabled}
         />
         <FooterForm type="login" />

@@ -26,7 +26,9 @@ const Login = ({ loginUser, saveUser }) => {
       saveUser(res.data.data);
       setUser({ email: "", password: "" });
       notify(user, "success", "Iniciaste session correctamente");
-      router.push("/");
+      setTimeout(() => {
+        router.push("/");
+      }, 1500);
     } catch (error) {
       notify(user, "error", error.message);
     } finally {

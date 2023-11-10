@@ -104,6 +104,7 @@ export const AuthProvider = ({ children }) => {
       setUser({});
       setIsAdmin("");
       setWishlist([]);
+      notify({}, "info", "Sesión cerrada correctamente")
     } catch (error) {
       notify(user, "error", "Error al cerrar sesión");
     }

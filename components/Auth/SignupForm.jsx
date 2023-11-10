@@ -51,7 +51,7 @@ const SignupForm = ({
         <input
           type="submit"
           value="Crear mi cuenta"
-          className={`${classInput} text-gray-200 bg-gray-900`}
+          className={`${classInput} text-gray-200 bg-gray-900 cursor-pointer`}
           disabled={isButtonDisabled}
         />
         <FooterForm type="signup" />
