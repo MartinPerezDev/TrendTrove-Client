@@ -27,7 +27,7 @@ const OrderDetailController = () => {
   };
 
   return (
-    <div className="m-2 border rounded min-h-screen">
+    <div className="min-h-screen">
       {loading ? <Loading /> : <OrderDetail order={order.current} />}
     </div>
   );

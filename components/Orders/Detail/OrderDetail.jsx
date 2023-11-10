@@ -2,6 +2,7 @@ import Link from "next/link";
 
 import BoxForm from "@/components/BoxForm";
 import { formatDate } from "@/utils/utilsFunctions";
+import GenericProductCard from "@/components/GenericProductCard";
 
 const OrderDetail = ({ order }) => {
   return (
@@ -24,26 +25,7 @@ const OrderDetail = ({ order }) => {
           <b>Listado de productos</b>
         </h3>
         {order.products.map((product, index) => (
-          <Link
-            href={`/products/detail/${product._id}`}
-            key={product.name + index}
-          >
-            <div
-              className="border-2 rounded py-2 px-4 text-sm italic mt-4 relative "
-              style={{
-                backgroundImage: `url(${product.images[0]})`,
-                backgroundSize: "30%",
-                backgroundPosition: "right",
-                backgroundRepeat: "no-repeat",
-              }}
-            >
-              <p className="text-base font-bold not-italic">{product.name}</p>
-              <p>Cantidad: {product.quantity}</p>
-              <p>Talle: {product.size}</p>
-              <p>Precio unitario: ${product.price}</p>
-              <p>Precio total: ${product.total}</p>
-            </div>
-          </Link>
+          <GenericProductCard key={product.name + index} {...product} />
         ))}
         <p className="pt-5">
           <b>Total de compra: </b>${order.payment.total}

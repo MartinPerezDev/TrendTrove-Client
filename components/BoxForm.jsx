@@ -20,8 +20,8 @@ const BoxForm = ({ children, title = "", type }) => {
     }
   };
   return (
-    <div className="w-full flex justify-center">
-      <div className="w-5/6 my-5 py-5 flex flex-col rounded-md shadow custom-box-shadow custom-gradient-form text-gray-100">
+    <div className="w-full px-1 flex justify-center items-center">
+      <div className="w-9/10 md:w-3/6 my-5 py-5 flex flex-col rounded-md shadow custom-box-shadow custom-gradient-form text-gray-100">
         <div
           title="head"
           className="w-full pt-5 pb-5 flex flex-col items-center justify-center"
