@@ -4,28 +4,39 @@ import Image from "next/image";
 
 import CartWidget from "./CartWidget";
 import Menu from "./Menu";
-import { FiMenu } from "react-icons/fi";
+import { FiCornerDownLeft, FiMenu } from "react-icons/fi";
 import { MdFavoriteBorder } from "react-icons/md";
 import { AuthContext } from "@/context/AuthContext";
 
 const NavBar = () => {
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [isMenuOpen, setIsMenuOpen] = useState(undefined);
   const { isAdmin, user } = useContext(AuthContext);
 
-  const toggleMenu = () => setIsMenuOpen((prev) => !prev);
+  const toggleMenu = () =>
+    setIsMenuOpen((prev) => (prev === undefined ? true : !prev));
 
   return (
     <div className="bg-gray-900 sticky top-0 z-10 select-none">
       <nav className="h-14 max-w-screen-xl mx-auto flex text-gray-100">
-        {isMenuOpen && (
-          <Menu toggleMenu={toggleMenu} user={user} isAdmin={isAdmin} />
-        )}
-        <div className="h-14 w-10 flex items-center mx-4 cursor-pointer">
+        <Menu
+          isMenuOpen={isMenuOpen}
+          toggleMenu={toggleMenu}
+          user={user}
+          isAdmin={isAdmin}
+        />
+        <div
+          title="toggle menu"
+          className="h-14 w-10 flex items-center mx-4 cursor-pointer"
+        >
           <div
             className="h-9 w-9 p-1 border border-gray-100 rounded"
             onClick={toggleMenu}
           >
-            <FiMenu className="h-full w-full" />
+            {isMenuOpen ? (
+              <FiCornerDownLeft className="h-full w-full" />
+            ) : (
+              <FiMenu className="h-full w-full" />
+            )}
           </div>
         </div>
         <Link href="/" className="h-14 flex items-center">

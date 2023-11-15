@@ -1,0 +1,87 @@
+.default {
+  margin-left: -100%;
+}
+.open {
+  animation-name: openMenu;
+  animation-duration: 0.5s;
+  animation-fill-mode: forwards;
+  animation-delay: 0s;
+}
+@keyframes openMenu {
+  from {
+    transform: translateX(-100%);
+    opacity: 0;
+  }
+
+  to {
+    transform: translateX(0%);
+    opacity: 1;
+  }
+}
+
+.close {
+  animation-name: closeMenu;
+  animation-duration: 0.3s;
+  animation-fill-mode: forwards;
+  animation-delay: 0s;
+}
+@keyframes closeMenu {
+  0% {
+    transform: translateX(0%);
+    opacity: 1;
+  }
+
+  50% {
+    opacity: 0;
+  }
+
+  100% {
+    transform: translateX(-100%);
+    opacity: 0;
+  }
+}
+
+.openCategories {
+  animation-name: openMenuCategories;
+  animation-duration: 0.3s;
+  animation-fill-mode: forwards;
+  animation-delay: 0s;
+}
+
+@keyframes openMenuCategories {
+  from {
+    max-height: 0;
+    opacity: 0;
+  }
+
+  to {
+    max-height: 500px;
+    opacity: 1;
+  }
+}
+
+.closeCategories {
+  animation-name: closeMenuCategories;
+  animation-duration: 0.3s;
+  animation-fill-mode: forwards;
+  animation-delay: 0s;
+}
+
+@keyframes closeMenuCategories {
+  from {
+    opacity: 1;
+    max-height: 500px;
+  }
+
+  to {
+    opacity: 0;
+    max-height: 0;
+    display: none;
+  }
+}
+
+.defaultCategories {
+  opacity: 0;
+  max-height: 0;
+  display: none;
+}

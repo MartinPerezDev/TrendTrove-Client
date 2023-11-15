@@ -6,23 +6,34 @@ import { LuPanelRightClose } from "react-icons/lu";
 import { IoReceiptOutline, IoShirtOutline } from "react-icons/io5";
 import { BsInfoCircle } from "react-icons/bs";
 import { AiOutlineHome } from "react-icons/ai";
-import {MdFavoriteBorder} from "react-icons/md"
+import { MdFavoriteBorder } from "react-icons/md";
 
-const Menu = ({ toggleMenu, user, isAdmin }) => {
+import styles from "./NavBar.module.css";
+
+const Menu = ({ isMenuOpen, toggleMenu, user, isAdmin }) => {
+  const styleLink = "p-1 my-1 flex items-center hover:bg-gray-900";
+  const styleMenu =
+    isMenuOpen === undefined
+      ? styles.default
+      : isMenuOpen === true
+      ? styles.open
+      : styles.close;
   return (
-    <div className="h-auto w-64 absolute my-14 bg-gray-800 p-2 flex flex-col z-10 rounded-br-md">
+    <div
+      className={`h-auto w-64 absolute my-14 bg-gray-800 p-2 flex flex-col z-10 rounded-br-md ${styleMenu}`}
+    >
       <HeadMenu toggleMenu={toggleMenu} user={user} />
       {isAdmin && (
-        <Link href="/dashboard" className="p-1 my-1 flex items-center">
+        <Link href="/dashboard" className={styleLink}>
           <LuPanelRightClose className="mr-2" />
           <p>Dashboard</p>
         </Link>
       )}
-      <Link href="/" className="p-1 my-1 flex items-center">
+      <Link href="/" className={styleLink}>
         <AiOutlineHome className="mr-2" />
         <p>Inicio</p>
       </Link>
-      <Link href="/products" className="p-1 my-1 flex items-center">
+      <Link href="/products" className={styleLink}>
         <IoShirtOutline className="mr-2" />
         <p>Productos</p>
       </Link>
@@ -32,22 +43,18 @@ const Menu = ({ toggleMenu, user, isAdmin }) => {
           <Link
             href="/user/wishlist"
             onClick={toggleMenu}
-            className="p-1 my-1 flex items-center"
+            className={styleLink}
           >
             <MdFavoriteBorder className="mr-2" />
             <p>Mis Favoritos</p>
           </Link>
-          <Link
-            href="/user/orders"
-            onClick={toggleMenu}
-            className="p-1 my-1 flex items-center"
-          >
+          <Link href="/user/orders" onClick={toggleMenu} className={styleLink}>
             <IoReceiptOutline className="mr-2" />
             <p>Mis Compras</p>
           </Link>
         </>
       )}
-      <Link href="/about" className="p-1 my-1 flex items-center">
+      <Link href="/about" className={styleLink}>
         <BsInfoCircle className="mr-2" />
         <p>Sobre Nosotros</p>
       </Link>

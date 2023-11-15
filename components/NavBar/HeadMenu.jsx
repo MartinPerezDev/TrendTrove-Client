@@ -12,6 +12,9 @@ const HeadMenu = ({ toggleMenu, user }) => {
     toggleMenu();
   };
 
+  const styleLink =
+    "p-1 my-1 mx-1 w-1/2 text-center border border-gray-600 rounded hover:cursor-pointer hover:bg-gray-900";
+
   return (
     <>
       <div title="head" className="w-full h-auto border-b-2 border-gray-700">
@@ -29,10 +32,7 @@ const HeadMenu = ({ toggleMenu, user }) => {
         <div title="options" className="my-4 flex text-sm">
           {user.name ? (
             <>
-              <div
-                className="p-1 my-1 mx-1 w-1/2 text-center border border-gray-600 rounded hover:cursor-pointer"
-                onClick={handleLogout}
-              >
+              <div className={styleLink} onClick={handleLogout}>
                 Cerrar sesion
               </div>
             </>
@@ -43,7 +43,7 @@ const HeadMenu = ({ toggleMenu, user }) => {
                   pathname: "/user/authentication",
                   query: { type: "login" },
                 }}
-                className="p-1 my-1 mx-1 w-1/2 text-center border border-gray-600 rounded hover:cursor-pointer"
+                className={styleLink}
                 onClick={toggleMenu}
               >
                 Ingresa
@@ -53,7 +53,7 @@ const HeadMenu = ({ toggleMenu, user }) => {
                   pathname: "/user/authentication",
                   query: { type: "signup" },
                 }}
-                className="p-1 my-1 mx-1 w-1/2 text-center border border-gray-600 rounded hover:cursor-pointer"
+                className={styleLink}
                 onClick={toggleMenu}
               >
                 Crea tu cuenta
