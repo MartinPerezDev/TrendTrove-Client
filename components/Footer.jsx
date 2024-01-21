@@ -1,5 +1,6 @@
 import { IoLocationSharp } from "react-icons/io5";
 import SocialLinks from "./SocialLinks";
+import Link from "next/link";
 
 const Footer = () => {
   return (
@@ -14,9 +15,20 @@ const Footer = () => {
             <SocialLinks type="footer" />
           </div>
           <p className="py-2">© 2023 TrendTrove, Inc. All Rights Reserved</p>
-          <div className="text-gray-400">
-            <p className="py-2">Terminos de uso</p>
-            <p className="py-2">Politicas de privacidad</p>
+          <div className="text-gray-400 flex flex-col">
+            <Link href="/terms" className="py-2">
+              Terminos de uso
+            </Link>
+            <Link href="/terms" className="py-2">
+              Politicas de privacidad
+            </Link>
+            <Link
+              href="https://www.linkedin.com/in/juan-martin-perez/"
+              target="_blank"
+              className="text-xs text-gray-600 py-5"
+            >
+              Desarrollado por Juan Martin Perez
+            </Link>
           </div>
         </div>
       </div>

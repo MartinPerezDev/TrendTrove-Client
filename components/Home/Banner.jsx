@@ -17,9 +17,9 @@ const Banner = ({ isMobile }) => {
             <p className="text-gray-600 text-sm py-2">
               Compra hoy y recibi $500 de bono
             </p>
-            <p className="text-gray-600 text-sm underline">
+            <Link href="/terms" className="text-gray-600 text-sm underline">
               Terminos y condiciones
-            </p>
+            </Link>
           </div>
           <Link href='/products' className="rounded-full py-4 px-6 my-10 bg-gradient-to-r from-sky-800 to-indigo-900">
             <p className="font-bold">Vamos de compras</p>
